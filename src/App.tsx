@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import initSqlJs, { type Database, type QueryExecResult } from "sql.js";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
+import { ResultsTable } from "./components/resultsTable";
 
-export default function SQLMurderMystery() {
+export default function App() {
   const [db, setDb] = useState<Database | null>(null);
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<QueryExecResult[]>([]);
@@ -25,7 +25,7 @@ export default function SQLMurderMystery() {
     initDB();
   }, []);
 
-  const runQuery = () => {
+  function runQuery() {
     if (!db) return;
     try {
       const result = db.exec(query);
@@ -35,7 +35,7 @@ export default function SQLMurderMystery() {
       setError((err as Error).message);
       setResults([]);
     }
-  };
+  }
 
   return (
     <div className="container mx-auto p-4 space-y-6">
@@ -57,40 +57,7 @@ export default function SQLMurderMystery() {
           <p>{error}</p>
         </div>
       )}
-
-      {results.length > 0 && (
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Results</h2>
-          <div className="overflow-x-auto">
-            <div className="inline-block min-w-full align-middle">
-              <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      {results[0].columns.map((column, i) => (
-                        <TableHead key={i} className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                          {column}
-                        </TableHead>
-                      ))}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {results[0].values.map((row, i) => (
-                      <TableRow key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                        {row.map((cell, j) => (
-                          <TableCell key={j} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {cell}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ResultsTable results={results} />
     </div>
   );
 }
