@@ -9,35 +9,30 @@ export function ResultsTable({ results }: ResultsTableProps) {
   if (results.length <= 0) return null;
 
   return (
-    <div>
-      <h2 className="mb-2 text-lg font-semibold">Results</h2>
-      <div>
-        <div className="inline-block min-w-full align-middle">
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  {results[0].columns.map((column, i) => (
-                    <TableHead key={i} className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                      {column}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {results[0].values.map((row, i) => (
-                  <TableRow key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                    {row.map((cell, j) => (
-                      <TableCell key={j} className="max-w-lg px-3 py-4 text-sm text-gray-500">
-                        {cell}
-                      </TableCell>
-                    ))}
-                  </TableRow>
+    <div className="inline-block min-w-full align-middle">
+      <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              {results[0].columns.map((column, i) => (
+                <TableHead key={i} className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  {column}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {results[0].values.map((row, i) => (
+              <TableRow key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                {row.map((cell, j) => (
+                  <TableCell key={j} className="max-w-lg px-3 py-4 text-sm text-gray-500">
+                    {cell}
+                  </TableCell>
                 ))}
-              </TableBody>
-            </Table>
-          </div>
-        </div>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
