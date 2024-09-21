@@ -10,8 +10,8 @@ export function ResultsTable({ results }: ResultsTableProps) {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-2">Results</h2>
-      <div className="overflow-x-auto">
+      <h2 className="mb-2 text-lg font-semibold">Results</h2>
+      <div>
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <Table>
@@ -28,7 +28,7 @@ export function ResultsTable({ results }: ResultsTableProps) {
                 {results[0].values.map((row, i) => (
                   <TableRow key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                     {row.map((cell, j) => (
-                      <TableCell key={j} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <TableCell key={j} className="max-w-lg px-3 py-4 text-sm text-gray-500">
                         {cell}
                       </TableCell>
                     ))}
