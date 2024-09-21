@@ -56,7 +56,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
           height="200px"
           language="sql"
           defaultValue={defaultValue}
-          options={{ lineNumbers: "off" }}
+          options={{ lineNumbers: "off", scrollbar: { alwaysConsumeMouseWheel: false } }}
           onMount={handleEditorDidMount}
         />
         <div className="flex max-w-md gap-2">
