@@ -9,7 +9,7 @@ export function ResultsTable({ results }: ResultsTableProps) {
   if (results === null) return null;
 
   return (
-    <div className="inline-block min-w-full align-middle shadow ring-1 ring-accent ring-opacity-5">
+    <div className="inline-block min-w-full align-middle shadow ring-1 ring-accent">
       <Table>
         <TableHeader>
           <TableRow>

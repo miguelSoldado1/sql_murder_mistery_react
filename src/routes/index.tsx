@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import initSqlJs, { type Database } from "sql.js";
-import { SolutionInput } from "./components/solutionInput";
-import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "./components/sqlQuery";
+import { SolutionInput } from "@/components/solutionInput";
+import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/components/sqlQuery";
 
-export default function App() {
+export const Route = createFileRoute("/")({
+  component: App,
+});
+
+function App() {
   const [db, setDb] = useState<Database | null>(null);
 
   useEffect(() => {
@@ -60,3 +65,4 @@ export default function App() {
     </div>
   );
 }
+
