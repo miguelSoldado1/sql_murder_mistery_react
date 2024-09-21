@@ -38,10 +38,10 @@ export default function App() {
   }
 
   return (
-    <div className="container mx-auto p-4 space-y-6">
-      <h1 className="text-2xl font-bold mb-4">SQL Murder Mystery</h1>
+    <div className="container mx-auto space-y-6 p-4">
+      <h1 className="mb-4 text-2xl font-bold">SQL Murder Mystery</h1>
       <div>
-        <h2 className="text-lg font-semibold mb-2">SQL Query</h2>
+        <h2 className="mb-2 text-lg font-semibold">SQL Query</h2>
         <Textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -52,7 +52,7 @@ export default function App() {
       </div>
 
       {error && (
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+        <div className="border-l-4 border-red-500 bg-red-100 p-4 text-red-700" role="alert">
           <p className="font-bold">Error</p>
           <p>{error}</p>
         </div>
