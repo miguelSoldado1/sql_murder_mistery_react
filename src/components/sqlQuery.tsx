@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
 import { ResultsTable } from "./resultsTable";
 import { Button } from "./ui/button";
@@ -7,38 +7,52 @@ import type { Database, QueryExecResult } from "sql.js";
 
 interface SqlQueryProps {
   db: Database | null;
+  defaultValue?: string;
+  placeholder?: string;
   children: React.ReactNode;
 }
 
-export function SqlQuery({ db, children }: SqlQueryProps) {
+export function SqlQuery({ children, db, defaultValue, placeholder }: SqlQueryProps) {
+  const [isPending, startTransition] = useTransition();
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   function resetQuery() {
-    setResults([]);
+    startTransition(() => setResults(null));
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!db) return;
+    startTransition(() => {
+      e.preventDefault();
+      if (!db) return;
 
-    const formData = new FormData(e.currentTarget);
-    const query = formData.get("query") as string;
+      const formData = new FormData(e.currentTarget);
+      const query = formData.get("query") as string;
 
-    try {
-      const result = db.exec(query);
-      setResults(result);
-      setError(null);
-    } catch (err) {
-      setError((err as Error).message);
-      setResults([]);
-    }
+      try {
+        const result = db.exec(query);
+        setResults(result);
+        setError(null);
+      } catch (err) {
+        setError((err as Error).message);
+        setResults([]);
+      }
+    });
   }
 
   return (
     <div className="space-y-4">
       <form onSubmit={handleSubmit} onReset={resetQuery}>
         {children}
+        <Textarea name="query" className="mb-4" defaultValue={defaultValue} placeholder={placeholder} />
+        <div className="flex max-w-md gap-2">
+          <Button type="submit" className="flex-1" disabled={isPending}>
+            Run Query
+          </Button>
+          <Button type="reset" variant="outline" className="flex-1" disabled={isPending}>
+            Reset
+          </Button>
+        </div>
       </form>
       {error && (
         <div className="border-l-4 border-red-500 bg-red-100 p-4 text-red-700" role="alert">
@@ -61,20 +75,4 @@ export function SqlQueryTitle({ className, ...props }: React.HTMLAttributes<HTML
 
 export function SqlQueryDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
-}
-
-export function SqlQueryTextArea({ className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return (
-    <div>
-      <Textarea name="query" className={cn("mb-4", className)} {...props} />
-      <div className="flex max-w-md gap-2">
-        <Button type="submit" className="flex-1">
-          Run Query
-        </Button>
-        <Button type="reset" variant="outline" className="flex-1">
-          Reset
-        </Button>
-      </div>
-    </div>
-  );
 }

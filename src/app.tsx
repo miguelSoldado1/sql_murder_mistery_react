@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import initSqlJs, { type Database } from "sql.js";
 import { SolutionInput } from "./components/solutionInput";
-import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTextArea, SqlQueryTitle } from "./components/sqlQuery";
+import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "./components/sqlQuery";
 
 export default function App() {
   const [db, setDb] = useState<Database | null>(null);
@@ -34,30 +34,27 @@ export default function App() {
         </p>
         <img src="/schema.png" className="mx-auto w-3/4" draggable={false} />
       </div>
-      <SqlQuery db={db}>
+      <SqlQuery db={db} defaultValue="SELECT name FROM sqlite_master WHERE type = 'table'">
         <SqlQueryHeader>
           <SqlQueryTitle>Run this query to find the names of the tables in this database</SqlQueryTitle>
           <SqlQueryDescription>
             This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
           </SqlQueryDescription>
         </SqlQueryHeader>
-        <SqlQueryTextArea defaultValue="SELECT name FROM sqlite_master WHERE type = 'table'"></SqlQueryTextArea>
       </SqlQuery>
-      <SqlQuery db={db}>
+      <SqlQuery db={db} defaultValue="SELECT sql FROM sqlite_master where name = 'crime_scene_report'">
         <SqlQueryHeader>
           <SqlQueryTitle>Find the structure of the `crime_scene_report` table</SqlQueryTitle>
           <SqlQueryDescription>
             This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
           </SqlQueryDescription>
         </SqlQueryHeader>
-        <SqlQueryTextArea defaultValue="SELECT sql FROM sqlite_master where name = 'crime_scene_report'"></SqlQueryTextArea>
       </SqlQuery>
-      <SqlQuery db={db}>
+      <SqlQuery db={db} placeholder="Enter your SQL query here...">
         <SqlQueryHeader>
           <SqlQueryTitle>Find who commited the murder</SqlQueryTitle>
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
         </SqlQueryHeader>
-        <SqlQueryTextArea placeholder="Enter your SQL query here..." />
       </SqlQuery>
       <SolutionInput />
     </div>
