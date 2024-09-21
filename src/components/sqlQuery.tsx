@@ -1,9 +1,10 @@
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
+import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
 import { ResultsTable } from "./resultsTable";
 import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
 import type { Database, QueryExecResult } from "sql.js";
+import type { editor } from "monaco-editor";
 
 interface SqlQueryProps {
   db: Database | null;
@@ -12,23 +13,29 @@ interface SqlQueryProps {
   children: React.ReactNode;
 }
 
-export function SqlQuery({ children, db, defaultValue, placeholder }: SqlQueryProps) {
+export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
   const [isPending, startTransition] = useTransition();
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  function handleEditorDidMount(editor: editor.IStandaloneCodeEditor) {
+    editorRef.current = editor;
+  }
+
   function resetQuery() {
-    startTransition(() => setResults(null));
+    startTransition(() => {
+      editorRef.current?.setValue(defaultValue ?? "");
+      setResults(null);
+    });
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const query = editorRef.current?.getValue();
+    if (!db || !query) return;
+
     startTransition(() => {
-      e.preventDefault();
-      if (!db) return;
-
-      const formData = new FormData(e.currentTarget);
-      const query = formData.get("query") as string;
-
       try {
         const result = db.exec(query);
         setResults(result);
@@ -44,7 +51,14 @@ export function SqlQuery({ children, db, defaultValue, placeholder }: SqlQueryPr
     <div className="space-y-4">
       <form onSubmit={handleSubmit} onReset={resetQuery}>
         {children}
-        <Textarea name="query" className="mb-4" defaultValue={defaultValue} placeholder={placeholder} />
+        <Editor
+          className="mb-4 rounded-md border border-input"
+          height="200px"
+          language="sql"
+          defaultValue={defaultValue}
+          options={{ lineNumbers: "off" }}
+          onMount={handleEditorDidMount}
+        />
         <div className="flex max-w-md gap-2">
           <Button type="submit" className="flex-1" disabled={isPending}>
             Run Query

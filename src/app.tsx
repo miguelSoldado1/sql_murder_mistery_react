@@ -50,7 +50,7 @@ export default function App() {
           </SqlQueryDescription>
         </SqlQueryHeader>
       </SqlQuery>
-      <SqlQuery db={db} placeholder="Enter your SQL query here...">
+      <SqlQuery db={db}>
         <SqlQueryHeader>
           <SqlQueryTitle>Find who commited the murder</SqlQueryTitle>
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
