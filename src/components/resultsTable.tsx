@@ -10,12 +10,12 @@ export function ResultsTable({ results }: ResultsTableProps) {
 
   return (
     <div className="inline-block min-w-full align-middle">
-      <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+      <div className="shadow ring-1 ring-accent ring-opacity-5">
         <Table>
           <TableHeader>
             <TableRow>
               {results[0].columns.map((column, i) => (
-                <TableHead key={i} className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                <TableHead key={i} className="font-semibold">
                   {column}
                 </TableHead>
               ))}
@@ -23,9 +23,9 @@ export function ResultsTable({ results }: ResultsTableProps) {
           </TableHeader>
           <TableBody>
             {results[0].values.map((row, i) => (
-              <TableRow key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+              <TableRow key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
                 {row.map((cell, j) => (
-                  <TableCell key={j} className="max-w-lg px-3 py-4 text-sm text-gray-500">
+                  <TableCell key={j} className="max-w-lg">
                     {cell}
                   </TableCell>
                 ))}
