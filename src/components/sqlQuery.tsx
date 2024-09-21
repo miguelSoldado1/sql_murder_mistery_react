@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { ResultsTable } from "./resultsTable";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
@@ -6,13 +7,10 @@ import type { Database, QueryExecResult } from "sql.js";
 
 interface SqlQueryProps {
   db: Database | null;
-  title: string;
-  placeholder?: string | undefined;
-  value?: string | undefined;
-  description?: string | undefined;
+  children: React.ReactNode;
 }
 
-export function SqlQuery({ db, title, placeholder, value, description }: SqlQueryProps) {
+export function SqlQuery({ db, children }: SqlQueryProps) {
   const [results, setResults] = useState<QueryExecResult[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,21 +38,7 @@ export function SqlQuery({ db, title, placeholder, value, description }: SqlQuer
   return (
     <div className="space-y-4">
       <form onSubmit={handleSubmit} onReset={resetQuery}>
-        <div className="mb-2">
-          <h2 className="text-lg font-semibold">{title}</h2>
-          {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
-        </div>
-        <Textarea name="query" placeholder={placeholder} className="mb-4">
-          {value}
-        </Textarea>
-        <div className="flex max-w-md gap-2">
-          <Button type="submit" className="flex-1">
-            Run Query
-          </Button>
-          <Button type="reset" variant="outline" className="flex-1">
-            Reset
-          </Button>
-        </div>
+        {children}
       </form>
       {error && (
         <div className="border-l-4 border-red-500 bg-red-100 p-4 text-red-700" role="alert">
@@ -63,6 +47,34 @@ export function SqlQuery({ db, title, placeholder, value, description }: SqlQuer
         </div>
       )}
       <ResultsTable results={results} />
+    </div>
+  );
+}
+
+export function SqlQueryHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("mb-2", className)} {...props} />;
+}
+
+export function SqlQueryTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h2 className={cn("text-lg font-semibold", className)} {...props} />;
+}
+
+export function SqlQueryDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
+}
+
+export function SqlQueryTextArea({ className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <div>
+      <Textarea name="query" className={cn("mb-4", className)} {...props} />
+      <div className="flex max-w-md gap-2">
+        <Button type="submit" className="flex-1">
+          Run Query
+        </Button>
+        <Button type="reset" variant="outline" className="flex-1">
+          Reset
+        </Button>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import initSqlJs, { type Database } from "sql.js";
 import { SolutionInput } from "./components/solutionInput";
-import { SqlQuery } from "./components/sqlQuery";
+import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTextArea, SqlQueryTitle } from "./components/sqlQuery";
 
 export default function App() {
   const [db, setDb] = useState<Database | null>(null);
@@ -32,24 +32,31 @@ export default function App() {
           corresponding crime scene report from the police department's database.
         </p>
       </div>
-      <SqlQuery
-        db={db}
-        title="Run this query to find the names of the tables in this database"
-        description="This command is specific to SQLite. For other databases, you'll have to learn their specific syntax."
-        value="SELECT name FROM sqlite_master WHERE type = 'table'"
-      />
-      <SqlQuery
-        db={db}
-        title="Run this query to find the structure of the `crime_scene_report` table"
-        description="Change the value of 'name' to see the structure of the other tables you learned about with the previous query."
-        value="SELECT sql FROM sqlite_master where name = 'crime_scene_report'"
-      />
-      <SqlQuery
-        db={db}
-        title="Find who commited the murder"
-        placeholder="Enter your SQL query here..."
-        description="When you think you know the answer, go to the next section."
-      />
+      <SqlQuery db={db}>
+        <SqlQueryHeader>
+          <SqlQueryTitle>Run this query to find the names of the tables in this database</SqlQueryTitle>
+          <SqlQueryDescription>
+            This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
+          </SqlQueryDescription>
+        </SqlQueryHeader>
+        <SqlQueryTextArea>SELECT name FROM sqlite_master WHERE type = 'table'</SqlQueryTextArea>
+      </SqlQuery>
+      <SqlQuery db={db}>
+        <SqlQueryHeader>
+          <SqlQueryTitle>Find the structure of the `crime_scene_report` table</SqlQueryTitle>
+          <SqlQueryDescription>
+            This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
+          </SqlQueryDescription>
+        </SqlQueryHeader>
+        <SqlQueryTextArea>SELECT sql FROM sqlite_master where name = 'crime_scene_report'</SqlQueryTextArea>
+      </SqlQuery>
+      <SqlQuery db={db}>
+        <SqlQueryHeader>
+          <SqlQueryTitle>Find who commited the murder</SqlQueryTitle>
+          <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
+        </SqlQueryHeader>
+        <SqlQueryTextArea placeholder="Enter your SQL query here..." />
+      </SqlQuery>
       <SolutionInput />
     </div>
   );
