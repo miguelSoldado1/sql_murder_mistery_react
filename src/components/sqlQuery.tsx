@@ -11,7 +11,7 @@ interface SqlQueryProps {
 }
 
 export function SqlQuery({ db, children }: SqlQueryProps) {
-  const [results, setResults] = useState<QueryExecResult[]>([]);
+  const [results, setResults] = useState<QueryExecResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   function resetQuery() {
@@ -26,7 +26,7 @@ export function SqlQuery({ db, children }: SqlQueryProps) {
     const query = formData.get("query") as string;
 
     try {
-      const result = db.exec(query);
+      const [result] = db.exec(query);
       setResults(result);
       setError(null);
     } catch (err) {
