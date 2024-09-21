@@ -41,7 +41,7 @@ export default function App() {
             This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
           </SqlQueryDescription>
         </SqlQueryHeader>
-        <SqlQueryTextArea>SELECT name FROM sqlite_master WHERE type = 'table'</SqlQueryTextArea>
+        <SqlQueryTextArea defaultValue="SELECT name FROM sqlite_master WHERE type = 'table'"></SqlQueryTextArea>
       </SqlQuery>
       <SqlQuery db={db}>
         <SqlQueryHeader>
@@ -50,7 +50,7 @@ export default function App() {
             This command is specific to SQLite. For other databases, you'll have to learn their specific syntax.
           </SqlQueryDescription>
         </SqlQueryHeader>
-        <SqlQueryTextArea>SELECT sql FROM sqlite_master where name = 'crime_scene_report'</SqlQueryTextArea>
+        <SqlQueryTextArea defaultValue="SELECT sql FROM sqlite_master where name = 'crime_scene_report'"></SqlQueryTextArea>
       </SqlQuery>
       <SqlQuery db={db}>
         <SqlQueryHeader>
