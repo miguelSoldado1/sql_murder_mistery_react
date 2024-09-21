@@ -29,8 +29,10 @@ export default function App() {
           A crime has taken place and the detective needs your help. The detective gave you the crime scene report, but you
           somehow lost it. You vaguely remember that the <strong>crime was a murder</strong> that occurred sometime on
           <strong> Jan.15, 2018</strong> and that <strong>it took place in SQL City</strong>. Start by retrieving the
-          corresponding crime scene report from the police department's database.
+          corresponding crime scene report from the police department's database. Below is the schema diagram for this
+          database.
         </p>
+        <img src="/schema.png" className="mx-auto w-3/4" draggable={false} />
       </div>
       <SqlQuery db={db}>
         <SqlQueryHeader>
