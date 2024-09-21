@@ -9,7 +9,6 @@ interface SqlQueryProps {
 export function SqlQuery({ runQuery, resetQuery }: SqlQueryProps) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const target = e.target as typeof e.target & { query: { value: string } };
     const formData = new FormData(e.currentTarget);
     const query = formData.get("query") as string;
 
