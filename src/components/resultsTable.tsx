@@ -2,7 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import type { QueryExecResult } from "sql.js";
 
 interface ResultsTableProps {
-  results: QueryExecResult | null;
+  results: QueryExecResult[] | null;
 }
 
 export function ResultsTable({ results }: ResultsTableProps) {
@@ -13,8 +13,8 @@ export function ResultsTable({ results }: ResultsTableProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            {results.columns.length > 0 ? (
-              results.columns.map((column, i) => (
+            {results[0]?.columns.length > 0 ? (
+              results[0].columns.map((column, i) => (
                 <TableHead key={i} className="font-semibold">
                   {column}
                 </TableHead>
@@ -25,8 +25,8 @@ export function ResultsTable({ results }: ResultsTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {results.values.length > 0 ? (
-            results.values.map((row, i) => (
+          {results[0]?.values.length > 0 ? (
+            results[0].values.map((row, i) => (
               <TableRow key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
                 {row.map((cell, j) => (
                   <TableCell key={j} className="max-w-lg">
@@ -37,7 +37,7 @@ export function ResultsTable({ results }: ResultsTableProps) {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={results[0]?.columns.length || 1} className="text-center">
+              <TableCell colSpan={1} className="text-center">
                 No Results Found
               </TableCell>
             </TableRow>
