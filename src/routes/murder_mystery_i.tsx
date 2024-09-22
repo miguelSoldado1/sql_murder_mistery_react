@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <div className="mx-auto my-6 w-4/5 space-y-12">
+    <div className="mx-auto space-y-12 p-6 md:w-4/5">
       <div className="space-y-4">
         <h1 className="text-2xl font-bold">SQL Murder Mystery I</h1>
         <p>
@@ -61,8 +61,19 @@ function App() {
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
         </SqlQueryHeader>
       </SqlQuery>
-      <SolutionInput />
+      <SolutionInput solutions={solutions} />
     </div>
   );
 }
+
+const solutions = [
+  {
+    solution: "jeremy bowers",
+    text: "Congrats, you found the murderer! But wait, there's more... If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.",
+  },
+  {
+    solution: "miranda priestly",
+    text: "Congrats, you found the brains behind the murder! Everyone in SQL City hails you as the greatest SQL detective of all time. Time to break out the champagne!",
+  },
+];
 
