@@ -7,7 +7,7 @@ export const Route = createFileRoute("/")({
 
 function App() {
   return (
-    <div className="mx-auto my-6 w-4/5 space-y-12">
+    <section className="space-y-12">
       <div className="space-y-4">
         <h1 className="text-3xl font-semibold">SQL Challenges</h1>
         <p>
@@ -35,7 +35,7 @@ function App() {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </section>
   );
 }
 
