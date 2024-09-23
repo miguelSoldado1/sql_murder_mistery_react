@@ -4,11 +4,7 @@ import { SolutionInput } from "@/components/solutionInput";
 import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/components/sqlQuery";
 import { useDatabase } from "@/hooks/useDatabase";
 
-export const Route = createFileRoute("/murder_mystery_i")({
-  component: App,
-});
-
-function App() {
+const App = () => {
   const db = useDatabase("/murder_mystery.db");
 
   return (
@@ -49,7 +45,7 @@ function App() {
       <SolutionInput solutions={solutions} />
     </section>
   );
-}
+};
 
 const solutions = [
   {
@@ -61,4 +57,8 @@ const solutions = [
     text: "Congrats, you found the brains behind the murder! Everyone in SQL City hails you as the greatest SQL detective of all time. Time to break out the champagne!",
   },
 ];
+
+export const Route = createFileRoute("/murder_mystery_i")({
+  component: App,
+});
 

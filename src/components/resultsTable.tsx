@@ -1,3 +1,4 @@
+import React from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { QueryExecResult } from "sql.js";
 
@@ -5,7 +6,7 @@ interface ResultsTableProps {
   results: QueryExecResult[] | null;
 }
 
-export function ResultsTable({ results }: ResultsTableProps) {
+export const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
   if (results === null) return null;
 
   return (
@@ -46,4 +47,4 @@ export function ResultsTable({ results }: ResultsTableProps) {
       </Table>
     </div>
   );
-}
+};

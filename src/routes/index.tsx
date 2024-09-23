@@ -1,11 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-export const Route = createFileRoute("/")({
-  component: App,
-});
-
-function App() {
+const App = () => {
   return (
     <section className="space-y-12">
       <div className="space-y-4">
@@ -37,5 +33,9 @@ function App() {
       </div>
     </section>
   );
-}
+};
+
+export const Route = createFileRoute("/")({
+  component: App,
+});
 

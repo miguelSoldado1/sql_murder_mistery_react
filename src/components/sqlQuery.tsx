@@ -1,4 +1,4 @@
-import { useRef, useState, useTransition } from "react";
+import React, { useRef, useState, useTransition } from "react";
 import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
 import { ResultsTable } from "./resultsTable";
@@ -13,24 +13,24 @@ interface SqlQueryProps {
   children: React.ReactNode;
 }
 
-export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
+export const SqlQuery = ({ children, db, defaultValue }: SqlQueryProps) => {
   const [isPending, startTransition] = useTransition();
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function handleEditorDidMount(editor: editor.IStandaloneCodeEditor) {
+  const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
-  }
+  };
 
-  function resetQuery() {
+  const resetQuery = () => {
     startTransition(() => {
       editorRef.current?.setValue(defaultValue ?? "");
       setResults(null);
     });
-  }
+  };
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const query = editorRef.current?.getValue();
     if (!db || !query) return;
@@ -45,7 +45,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
         setResults([]);
       }
     });
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -83,16 +83,16 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
       <ResultsTable results={results} />
     </div>
   );
-}
+};
 
-export function SqlQueryHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const SqlQueryHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   return <div className={cn("mb-2", className)} {...props} />;
-}
+};
 
-export function SqlQueryTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export const SqlQueryTitle = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
   return <h2 className={cn("text-lg font-semibold", className)} {...props} />;
-}
+};
 
-export function SqlQueryDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export const SqlQueryDescription = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => {
   return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
-}
+};
