@@ -1,10 +1,10 @@
 import React, { useRef, useState, useTransition } from "react";
-import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
-import { ResultsTable } from "./resultsTable";
+import Editor from "@monaco-editor/react";
+import { ResultsTable } from "./results-table";
 import { Button } from "./ui/button";
-import type { Database, QueryExecResult } from "sql.js";
 import type { editor } from "monaco-editor";
+import type { Database, QueryExecResult } from "sql.js";
 
 interface SqlQueryProps {
   db: Database | null;

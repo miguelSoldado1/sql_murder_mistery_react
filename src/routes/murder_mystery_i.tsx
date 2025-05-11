@@ -1,8 +1,10 @@
+import { HeaderDescription, HeaderTitle, HeaderWrapper } from "@/components/challenge-header";
+import { SchemaVisualizer } from "@/components/schema-visualiser";
+import { SolutionInput } from "@/components/solution-input";
+import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/components/sql-query";
+import { useDatabase } from "@/hooks/use-database";
+import { initialEdges, initialNodes } from "@/schema/murder_mystery";
 import { createFileRoute } from "@tanstack/react-router";
-import { HeaderDescription, HeaderSchema, HeaderTitle, HeaderWrapper } from "@/components/challengeHeader";
-import { SolutionInput } from "@/components/solutionInput";
-import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/components/sqlQuery";
-import { useDatabase } from "@/hooks/useDatabase";
 
 const App = () => {
   const db = useDatabase("/murder_mystery.db");
@@ -18,7 +20,7 @@ const App = () => {
           corresponding crime scene report from the police department's database. Below is the schema diagram for this
           database.
         </HeaderDescription>
-        <HeaderSchema src="/schema.png" />
+        <SchemaVisualizer initialNodes={initialNodes} initialEdges={initialEdges} />
       </HeaderWrapper>
       <SqlQuery db={db} defaultValue="SELECT name FROM sqlite_master WHERE type = 'table'">
         <SqlQueryHeader>
@@ -61,4 +63,3 @@ const solutions = [
 export const Route = createFileRoute("/murder_mystery_i")({
   component: App,
 });
-

@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 const App = () => {
   return (
@@ -38,4 +38,3 @@ const App = () => {
 export const Route = createFileRoute("/")({
   component: App,
 });
-

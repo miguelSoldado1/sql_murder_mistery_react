@@ -28,6 +28,13 @@ export default tseslint.config(
           fixStyle: "inline-type-imports",
         },
       ],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          varsIgnorePattern: "^_",
+          argsIgnorePattern: "^_",
+        },
+      ],
     },
   }
 );

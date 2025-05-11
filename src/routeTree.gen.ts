@@ -10,101 +10,99 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as MurdermysteryiiImport } from './routes/murder_mystery_ii'
-import { Route as MurdermysteryiImport } from './routes/murder_mystery_i'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as IndexImport } from "./routes/index";
+import { Route as MurdermysteryiImport } from "./routes/murder_mystery_i";
+import { Route as MurdermysteryiiImport } from "./routes/murder_mystery_ii";
 
 // Create/Update Routes
 
 const MurdermysteryiiRoute = MurdermysteryiiImport.update({
-  path: '/murder_mystery_ii',
+  path: "/murder_mystery_ii",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const MurdermysteryiRoute = MurdermysteryiImport.update({
-  path: '/murder_mystery_i',
+  path: "/murder_mystery_i",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/murder_mystery_i': {
-      id: '/murder_mystery_i'
-      path: '/murder_mystery_i'
-      fullPath: '/murder_mystery_i'
-      preLoaderRoute: typeof MurdermysteryiImport
-      parentRoute: typeof rootRoute
-    }
-    '/murder_mystery_ii': {
-      id: '/murder_mystery_ii'
-      path: '/murder_mystery_ii'
-      fullPath: '/murder_mystery_ii'
-      preLoaderRoute: typeof MurdermysteryiiImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/murder_mystery_i": {
+      id: "/murder_mystery_i";
+      path: "/murder_mystery_i";
+      fullPath: "/murder_mystery_i";
+      preLoaderRoute: typeof MurdermysteryiImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/murder_mystery_ii": {
+      id: "/murder_mystery_ii";
+      path: "/murder_mystery_ii";
+      fullPath: "/murder_mystery_ii";
+      preLoaderRoute: typeof MurdermysteryiiImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/murder_mystery_i': typeof MurdermysteryiRoute
-  '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  "/": typeof IndexRoute;
+  "/murder_mystery_i": typeof MurdermysteryiRoute;
+  "/murder_mystery_ii": typeof MurdermysteryiiRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/murder_mystery_i': typeof MurdermysteryiRoute
-  '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  "/": typeof IndexRoute;
+  "/murder_mystery_i": typeof MurdermysteryiRoute;
+  "/murder_mystery_ii": typeof MurdermysteryiiRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/murder_mystery_i': typeof MurdermysteryiRoute
-  '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/murder_mystery_i": typeof MurdermysteryiRoute;
+  "/murder_mystery_ii": typeof MurdermysteryiiRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/murder_mystery_i' | '/murder_mystery_ii'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/murder_mystery_i' | '/murder_mystery_ii'
-  id: '__root__' | '/' | '/murder_mystery_i' | '/murder_mystery_ii'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/murder_mystery_i" | "/murder_mystery_ii";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/murder_mystery_i" | "/murder_mystery_ii";
+  id: "__root__" | "/" | "/murder_mystery_i" | "/murder_mystery_ii";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  MurdermysteryiRoute: typeof MurdermysteryiRoute
-  MurdermysteryiiRoute: typeof MurdermysteryiiRoute
+  IndexRoute: typeof IndexRoute;
+  MurdermysteryiRoute: typeof MurdermysteryiRoute;
+  MurdermysteryiiRoute: typeof MurdermysteryiiRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MurdermysteryiRoute: MurdermysteryiRoute,
   MurdermysteryiiRoute: MurdermysteryiiRoute,
-}
+};
 
-export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
