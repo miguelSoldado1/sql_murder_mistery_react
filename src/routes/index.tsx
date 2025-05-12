@@ -1,7 +1,8 @@
+import { SolvedIcon } from "@/components/solved-icon";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { getLocalStorageKey } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { TrophyIcon } from "lucide-react";
 import type { Challenge } from "@/types";
 
 const challenges: Challenge[] = [
@@ -31,18 +32,18 @@ const App = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {challenges.map((challenge) => (
-              <TableRow key={challenge.href}>
-                <TableCell className="p-0">
-                  <Link to={challenge.href} className="flex w-full items-center justify-between p-4">
-                    <span>{challenge.title}</span>
-                    {localStorage.getItem(getLocalStorageKey(challenge.href)) === "true" && (
-                      <TrophyIcon className="size-4" />
-                    )}
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
+            <TooltipProvider>
+              {challenges.map((challenge) => (
+                <TableRow key={challenge.href}>
+                  <TableCell className="p-0">
+                    <Link to={challenge.href} className="flex w-full items-center justify-between p-4">
+                      <span>{challenge.title}</span>
+                      {localStorage.getItem(getLocalStorageKey(challenge.href)) === "true" && <SolvedIcon />}
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TooltipProvider>
           </TableBody>
         </Table>
       </div>

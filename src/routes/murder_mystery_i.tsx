@@ -45,7 +45,7 @@ const App = () => {
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
         </SqlQueryHeader>
       </SqlQuery>
-      <SolutionInput solutions={solutions} challengeId="murder_mystery_i" />
+      <SolutionInput solutions={solutions} />
     </section>
   );
 };

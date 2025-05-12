@@ -8,7 +8,6 @@ import type { Solution } from "@/types";
 
 interface SolutionInputProps {
   solutions: Solution[];
-  challengeId: string;
 }
 
 const WRONG_SOLUTION = "That's not the right person. Try again!";
