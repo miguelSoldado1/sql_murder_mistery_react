@@ -1,7 +1,13 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { getLocalStorageKey } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { TrophyIcon } from "lucide-react";
+import type { Challenge } from "@/types";
 
-const challenges = [{ href: "/murder_mystery_i", title: "SQL Murder Mistery I" }];
+const challenges: Challenge[] = [
+  { href: "/murder_mystery_i", title: "SQL Murder Mystery I" },
+  { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
+];
 
 const App = () => {
   return (
@@ -28,8 +34,11 @@ const App = () => {
             {challenges.map((challenge) => (
               <TableRow key={challenge.href}>
                 <TableCell className="p-0">
-                  <Link to={challenge.href} className="block w-full p-4">
-                    {challenge.title}
+                  <Link to={challenge.href} className="flex w-full items-center justify-between p-4">
+                    <span>{challenge.title}</span>
+                    {localStorage.getItem(getLocalStorageKey(challenge.href)) === "true" && (
+                      <TrophyIcon className="size-4" />
+                    )}
                   </Link>
                 </TableCell>
               </TableRow>

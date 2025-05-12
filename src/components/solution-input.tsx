@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { getLocalStorageKey } from "@/lib/utils";
+import { useRouterState } from "@tanstack/react-router";
 import { CheckIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import type { Solution } from "@/types";
 
 interface SolutionInputProps {
-  solutions: { solution: string; text: string }[];
+  solutions: Solution[];
+  challengeId: string;
 }
+
+const WRONG_SOLUTION = "That's not the right person. Try again!";
 
 export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
   const [result, setResult] = useState("");
+  const router = useRouterState();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -19,9 +26,16 @@ export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
     const foundSolution = solutions.find((s) => s.solution.trim().toLowerCase() === normalizedSolution);
 
     if (foundSolution) {
+      if (foundSolution.final) {
+        const key = getLocalStorageKey(router.location.pathname);
+        const puzzleSolution = localStorage.getItem(key);
+        if (!puzzleSolution) localStorage.setItem(key, "true");
+      }
+
       return setResult(foundSolution.text);
     }
-    return setResult("That's not the right person. Try again!");
+
+    return setResult(WRONG_SOLUTION);
   };
 
   return (

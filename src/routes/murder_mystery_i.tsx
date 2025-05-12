@@ -5,6 +5,7 @@ import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/
 import { useDatabase } from "@/hooks/use-database";
 import { initialEdges, initialNodes } from "@/schema/murder_mystery";
 import { createFileRoute } from "@tanstack/react-router";
+import type { Solution } from "@/types";
 
 const App = () => {
   const db = useDatabase("/murder_mystery.db");
@@ -44,12 +45,12 @@ const App = () => {
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
         </SqlQueryHeader>
       </SqlQuery>
-      <SolutionInput solutions={solutions} />
+      <SolutionInput solutions={solutions} challengeId="murder_mystery_i" />
     </section>
   );
 };
 
-const solutions = [
+const solutions: Solution[] = [
   {
     solution: "jeremy bowers",
     text: "Congrats, you found the murderer! But wait, there's more... If you think you're up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.",
@@ -57,6 +58,7 @@ const solutions = [
   {
     solution: "miranda priestly",
     text: "Congrats, you found the brains behind the murder! Everyone in SQL City hails you as the greatest SQL detective of all time. Time to break out the champagne!",
+    final: true,
   },
 ];
 
