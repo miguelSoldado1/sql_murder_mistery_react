@@ -1,8 +1,10 @@
 import { SolvedIcon } from "@/components/solved-icon";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getLocalStorageKey } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { EraserIcon } from "lucide-react";
 import type { Challenge } from "@/types";
 
 const challenges: Challenge[] = [
@@ -10,14 +12,28 @@ const challenges: Challenge[] = [
   { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
 ];
 
+const clearProgress = (challenges: Challenge[]) => {
+  challenges.forEach((challenge) => {
+    localStorage.removeItem(getLocalStorageKey(challenge.href));
+  });
+
+  window.location.reload();
+};
+
 const App = () => {
   return (
     <section className="space-y-12">
       <div className="space-y-4">
-        <h1 className="text-3xl font-semibold">SQL Challenges</h1>
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-semibold">SQL Challenges</h1>
+          <Button onClick={() => clearProgress(challenges)} className="gap-2">
+            <EraserIcon className="size-4" />
+            Clear Solved Status
+          </Button>
+        </div>
         <p>
           Inspired by the classic{" "}
-          <a href="https://mystery.knightlab.com/" className="text-blue-500 underline">
+          <a href="https://mystery.knightlab.com/" className="text-primary underline hover:text-muted-foreground">
             SQL Murder Mystery
           </a>
           , this website takes the concept further by offering a variety of additional challenges. Immerse yourself in the
