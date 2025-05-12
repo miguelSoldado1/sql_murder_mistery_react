@@ -1,6 +1,8 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
+const challenges = [{ href: "/murder_mystery_i", title: "SQL Murder Mistery I" }];
+
 const App = () => {
   return (
     <section className="space-y-12">
@@ -23,11 +25,15 @@ const App = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="max-w-lg">
-                <Link to="/murder_mystery_i">SQL Murder Mistery I</Link>
-              </TableCell>
-            </TableRow>
+            {challenges.map((challenge) => (
+              <TableRow key={challenge.href}>
+                <TableCell className="p-0">
+                  <Link to={challenge.href} className="block w-full p-4">
+                    {challenge.title}
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
