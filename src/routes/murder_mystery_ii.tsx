@@ -1,9 +1,9 @@
 import { HeaderBreadcrumb, HeaderWrapper } from "@/components/challenge-header";
-import { useDatabase } from "@/hooks/use-database";
+// import { useDatabase } from "@/hooks/use-database";
 import { createFileRoute } from "@tanstack/react-router";
 
 const App = () => {
-  const db = useDatabase("/murder_mystery.db");
+  // const db = useDatabase("/murder_mystery.db");
 
   return (
     <section className="space-y-12">
