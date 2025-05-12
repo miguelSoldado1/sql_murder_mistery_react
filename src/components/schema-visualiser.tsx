@@ -46,7 +46,7 @@ function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerP
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           fitView
-          minZoom={0.75}
+          minZoom={0.5}
           maxZoom={1}
           defaultEdgeOptions={{ type: "custom" }}
         >

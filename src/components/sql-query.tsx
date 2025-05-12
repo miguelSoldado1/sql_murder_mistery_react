@@ -1,6 +1,7 @@
 import React, { useRef, useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
 import Editor from "@monaco-editor/react";
+import { PlayIcon, RotateCcwIcon } from "lucide-react";
 import { ResultsTable } from "./results-table";
 import { Button } from "./ui/button";
 import type { editor } from "monaco-editor";
@@ -66,10 +67,12 @@ export const SqlQuery = ({ children, db, defaultValue }: SqlQueryProps) => {
           onMount={handleEditorDidMount}
         />
         <div className="flex max-w-md gap-2">
-          <Button type="submit" className="flex-1" disabled={isPending}>
+          <Button type="submit" className="flex-1 gap-2" disabled={isPending}>
+            <PlayIcon className="size-4" />
             Run Query
           </Button>
-          <Button type="reset" variant="outline" className="flex-1" disabled={isPending}>
+          <Button type="reset" variant="outline" className="flex-1 gap-2" disabled={isPending}>
+            <RotateCcwIcon className="size-4" />
             Reset
           </Button>
         </div>

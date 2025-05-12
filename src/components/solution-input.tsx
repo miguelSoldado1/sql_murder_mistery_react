@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CheckIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -28,7 +29,10 @@ export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
       <h2 className="text-lg font-semibold">Submit Solution</h2>
       <form className="flex flex-col gap-4 md:flex-row" onSubmit={handleSubmit}>
         <Input name="solution" placeholder="Enter your solution here..." />
-        <Button type="submit">Check Solution</Button>
+        <Button type="submit" className="flex-1 gap-2">
+          <CheckIcon className="size-4" />
+          Check Solution
+        </Button>
       </form>
       {result && (
         <div role="alert" className="text-sm font-bold">
