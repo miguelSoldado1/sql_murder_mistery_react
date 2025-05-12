@@ -1,5 +1,13 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "./ui/breadcrumb";
 
 export const HeaderWrapper: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   return <div className={cn("space-y-4", className)} {...props} />;
@@ -13,8 +21,22 @@ export const HeaderDescription: React.FC<React.HTMLAttributes<HTMLParagraphEleme
   return <p {...props} />;
 };
 
-export const HeaderSchema: React.FC<
-  React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-> = ({ className, ...props }) => {
-  return <img className={cn("mx-auto w-3/4", className)} draggable={false} {...props} />;
+interface HeaderBreadcrumbProps {
+  children: React.ReactNode;
+}
+
+export const HeaderBreadcrumb: React.FC<HeaderBreadcrumbProps> = ({ children }) => {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList className="text-xl">
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage className="font-bold">{children}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
 };

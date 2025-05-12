@@ -1,4 +1,4 @@
-import { HeaderDescription, HeaderTitle, HeaderWrapper } from "@/components/challenge-header";
+import { HeaderBreadcrumb, HeaderDescription, HeaderWrapper } from "@/components/challenge-header";
 import { SchemaVisualizer } from "@/components/schema-visualiser";
 import { SolutionInput } from "@/components/solution-input";
 import { SqlQuery, SqlQueryDescription, SqlQueryHeader, SqlQueryTitle } from "@/components/sql-query";
@@ -12,7 +12,7 @@ const App = () => {
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderTitle>SQL Murder Mystery I</HeaderTitle>
+        <HeaderBreadcrumb>SQL Murder Mystery I</HeaderBreadcrumb>
         <HeaderDescription>
           A crime has taken place and the detective needs your help. The detective gave you the crime scene report, but you
           somehow lost it. You vaguely remember that the <strong>crime was a murder</strong> that occurred sometime on

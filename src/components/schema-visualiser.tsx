@@ -46,8 +46,8 @@ function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerP
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           fitView
-          minZoom={0.5}
-          maxZoom={0.85}
+          minZoom={0.75}
+          maxZoom={1}
           defaultEdgeOptions={{ type: "custom" }}
         >
           <Background variant={BackgroundVariant.Dots} gap={20} size={2} />

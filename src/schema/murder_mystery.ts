@@ -4,7 +4,7 @@ export const initialNodes: Node[] = [
   {
     id: "crime_scene_report",
     type: "tableNode",
-    position: { x: 0, y: 150 },
+    position: { x: -100, y: 150 },
     data: {
       label: "crime_scene_report",
       fields: [
@@ -18,7 +18,7 @@ export const initialNodes: Node[] = [
   {
     id: "interview",
     type: "tableNode",
-    position: { x: 250, y: 183 },
+    position: { x: 200, y: 175 },
     data: {
       label: "interview",
       fields: [
@@ -44,7 +44,7 @@ export const initialNodes: Node[] = [
   {
     id: "get_fit_now_member",
     type: "tableNode",
-    position: { x: 200, y: 500 },
+    position: { x: 175, y: 500 },
     data: {
       label: "get_fit_now_member",
       fields: [
@@ -88,7 +88,7 @@ export const initialNodes: Node[] = [
   {
     id: "drivers_license",
     type: "tableNode",
-    position: { x: 800, y: 150 },
+    position: { x: 825, y: 150 },
     data: {
       label: "drivers_license",
       fields: [
@@ -107,7 +107,7 @@ export const initialNodes: Node[] = [
   {
     id: "income",
     type: "tableNode",
-    position: { x: 800, y: 570 },
+    position: { x: 825, y: 575 },
     data: {
       label: "income",
       fields: [
