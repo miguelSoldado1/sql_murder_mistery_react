@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import SchemaEdge from "@/components/schema-edge";
 import TableNode from "@/components/table-node";
 import { Background, BackgroundVariant, ReactFlow, ReactFlowProvider, useEdgesState, useNodesState } from "@xyflow/react";
@@ -21,19 +21,20 @@ export function SchemaVisualizer({ initialNodes, initialEdges }: SchemaVisualize
   );
 }
 
+const edgeTypes = {
+  custom: SchemaEdge,
+};
+
 function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerProps) {
   const [nodes, _setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
-  const edgeTypes = {
-    custom: SchemaEdge,
-  };
-
-  const nodeTypes = {
+  const nodeTypes = useMemo(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tableNode: (props: any) => <TableNode {...props} initialEdges={initialEdges} />,
-  };
+    () => ({ tableNode: (props: any) => <TableNode {...props} initialEdges={initialEdges} /> }),
+    [initialEdges]
+  );
 
   return (
     <div className="flex flex-1 items-stretch">
