@@ -1,6 +1,6 @@
 import { useMemo, useRef } from "react";
-import SchemaEdge from "@/components/schema-edge";
-import TableNode from "@/components/table-node";
+import { SchemaEdge } from "@/components/schema-edge";
+import { TableNode } from "@/components/table-node";
 import { Background, BackgroundVariant, ReactFlow, ReactFlowProvider, useEdgesState, useNodesState } from "@xyflow/react";
 import type { Edge, Node } from "@xyflow/react";
 
@@ -11,7 +11,7 @@ interface SchemaVisualizerProps {
   initialEdges: Edge[];
 }
 
-export function SchemaVisualizer({ initialNodes, initialEdges }: SchemaVisualizerProps) {
+export const SchemaVisualizer: React.FC<SchemaVisualizerProps> = ({ initialNodes, initialEdges }) => {
   return (
     <div className="flex h-[36rem] flex-col">
       <ReactFlowProvider>
@@ -19,13 +19,13 @@ export function SchemaVisualizer({ initialNodes, initialEdges }: SchemaVisualize
       </ReactFlowProvider>
     </div>
   );
-}
+};
 
 const edgeTypes = {
   custom: SchemaEdge,
 };
 
-function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerProps) {
+const SchemaVisualizerInner: React.FC<SchemaVisualizerProps> = ({ initialNodes, initialEdges }) => {
   const [nodes, _setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
@@ -56,4 +56,4 @@ function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerP
       </div>
     </div>
   );
-}
+};

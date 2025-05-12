@@ -1,7 +1,7 @@
 import { BaseEdge, getSmoothStepPath, Position } from "@xyflow/react";
 import type { EdgeProps } from "@xyflow/react";
 
-export default function SchemaEdge({
+export const SchemaEdge: React.FC<EdgeProps> = ({
   sourceX,
   sourceY,
   targetX,
@@ -10,7 +10,7 @@ export default function SchemaEdge({
   targetPosition,
   style = {},
   markerEnd,
-}: EdgeProps) {
+}) => {
   const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -22,4 +22,4 @@ export default function SchemaEdge({
   });
 
   return <BaseEdge path={edgePath} style={style} markerEnd={markerEnd} />;
-}
+};
