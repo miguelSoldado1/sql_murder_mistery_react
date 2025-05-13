@@ -28,7 +28,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
         <TableBody>
           {results[0]?.values.length > 0 ? (
             results[0].values.map((row, i) => (
-              <TableRow key={i} className={i % 2 === 0 ? "bg-background" : "bg-secondary"}>
+              <TableRow key={i} className="even:bg-secondary">
                 {row.map((cell, j) => (
                   <TableCell key={j} className="whitespace-nowrap">
                     {cell}

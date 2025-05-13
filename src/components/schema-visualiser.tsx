@@ -51,7 +51,7 @@ const SchemaVisualizerInner: React.FC<SchemaVisualizerProps> = ({ initialNodes, 
           maxZoom={1}
           defaultEdgeOptions={{ type: "custom" }}
         >
-          <Background variant={BackgroundVariant.Dots} gap={20} size={2} />
+          <Background variant={BackgroundVariant.Cross} gap={30} size={5} />
         </ReactFlow>
       </div>
     </div>

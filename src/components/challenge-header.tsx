@@ -28,7 +28,7 @@ interface HeaderBreadcrumbProps {
 export const HeaderBreadcrumb: React.FC<HeaderBreadcrumbProps> = ({ children }) => {
   return (
     <Breadcrumb>
-      <BreadcrumbList className="text-2xl">
+      <BreadcrumbList className="text-xl md:text-2xl">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
         </BreadcrumbItem>
