@@ -6,8 +6,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { Challenge } from "@/types";
 
 const challenges: Challenge[] = [
-  { href: "/murder_mystery_i", title: "sql murder mystery i" },
-  { href: "/murder_mystery_ii", title: "sql murder mystery ii" },
+  { href: "/murder_mystery_i", title: "SQL Murder Mystery I" },
+  { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
 ];
 
 const App = () => {

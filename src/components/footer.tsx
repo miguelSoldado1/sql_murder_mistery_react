@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className="mx-auto border-t p-6 md:w-4/5">
+    <footer className="mx-auto border-t p-4 md:w-4/5 md:p-6">
       <p className="flex justify-center text-sm text-muted-foreground">
         <a
           href="https://github.com/miguelSoldado1/sql_murder_mistery_react"
