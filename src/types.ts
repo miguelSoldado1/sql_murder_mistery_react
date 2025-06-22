@@ -1,7 +1,7 @@
 export interface Solution {
   solution: string;
   text: string;
-  final?: boolean | undefined;
+  final: boolean;
 }
 
 export interface Challenge {
