@@ -7,7 +7,7 @@ import { initialEdges, initialNodes } from "@/schema/murder_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
-const App = () => {
+const MurderMysteryI = () => {
   const db = useDatabase("/murder_mystery.db");
 
   return (
@@ -64,5 +64,5 @@ const solutions: Solution[] = [
 ];
 
 export const Route = createFileRoute("/murder_mystery_i")({
-  component: App,
+  component: MurderMysteryI,
 });

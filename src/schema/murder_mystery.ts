@@ -81,6 +81,7 @@ export const initialNodes: Node[] = [
         { name: "name", type: "text" },
         { name: "license_id", type: "integer", isForeign: true },
         { name: "address_number", type: "integer" },
+        { name: "address_street_name", type: "text" },
         { name: "ssn", type: "char", isForeign: true },
       ],
     },
