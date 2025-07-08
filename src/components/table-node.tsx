@@ -22,7 +22,7 @@ interface TableNodeProps extends NodeProps<TableNodeType> {
   initialEdges: Edge[];
 }
 
-const TableNodeComponent: React.FC<TableNodeProps> = ({ data, id, initialEdges }) => {
+function TableNodeComponent({ data, id, initialEdges }: TableNodeProps) {
   // Find all source connections for this node
   const sourceConnections = initialEdges.filter((edge) => edge.source === id).map((edge) => edge.sourceHandle);
 
@@ -65,6 +65,6 @@ const TableNodeComponent: React.FC<TableNodeProps> = ({ data, id, initialEdges }
       </div>
     </div>
   );
-};
+}
 
 export const TableNode = memo(TableNodeComponent);

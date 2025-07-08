@@ -12,11 +12,11 @@ interface SolutionInputProps {
 
 const WRONG_SOLUTION = "That's not the right person. Try again!";
 
-export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
+export function SolutionInput({ solutions }: SolutionInputProps) {
   const [result, setResult] = useState<{ text: string; isFinal: boolean } | null>(null);
   const router = useRouterState();
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const solution = formData.get("solution") as string;
@@ -34,7 +34,7 @@ export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
     }
 
     return setResult({ text: WRONG_SOLUTION, isFinal: false });
-  };
+  }
 
   return (
     <div className="space-y-2">
@@ -65,4 +65,4 @@ export const SolutionInput: React.FC<SolutionInputProps> = ({ solutions }) => {
       )}
     </div>
   );
-};
+}

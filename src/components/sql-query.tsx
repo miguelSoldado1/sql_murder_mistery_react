@@ -14,24 +14,24 @@ interface SqlQueryProps {
   children: React.ReactNode;
 }
 
-export const SqlQuery = ({ children, db, defaultValue }: SqlQueryProps) => {
+export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
   const [isPending, startTransition] = useTransition();
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor) => {
+  function handleEditorDidMount(editor: editor.IStandaloneCodeEditor) {
     editorRef.current = editor;
-  };
+  }
 
-  const resetQuery = () => {
+  function resetQuery() {
     startTransition(() => {
       editorRef.current?.setValue(defaultValue ?? "");
       setResults(null);
     });
-  };
+  }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const query = editorRef.current?.getValue();
     if (!db || !query) return;
@@ -46,7 +46,7 @@ export const SqlQuery = ({ children, db, defaultValue }: SqlQueryProps) => {
         setResults([]);
       }
     });
-  };
+  }
 
   return (
     <div className="space-y-4">
@@ -86,16 +86,16 @@ export const SqlQuery = ({ children, db, defaultValue }: SqlQueryProps) => {
       <ResultsTable results={results} />
     </div>
   );
-};
+}
 
-export const SqlQueryHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+export function SqlQueryHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn("mb-2", className)} {...props} />;
-};
+}
 
-export const SqlQueryTitle = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+export function SqlQueryTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return <h2 className={cn("text-lg font-semibold", className)} {...props} />;
-};
+}
 
-export const SqlQueryDescription = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => {
+export function SqlQueryDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return <p className={cn("text-sm text-muted-foreground", className)} {...props} />;
-};
+}

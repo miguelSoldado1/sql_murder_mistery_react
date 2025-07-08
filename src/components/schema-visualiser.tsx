@@ -11,7 +11,7 @@ interface SchemaVisualizerProps {
   initialEdges: Edge[];
 }
 
-export const SchemaVisualizer: React.FC<SchemaVisualizerProps> = ({ initialNodes, initialEdges }) => {
+export function SchemaVisualizer({ initialNodes, initialEdges }: SchemaVisualizerProps) {
   return (
     <div className="flex h-[36rem] flex-col">
       <ReactFlowProvider>
@@ -19,13 +19,13 @@ export const SchemaVisualizer: React.FC<SchemaVisualizerProps> = ({ initialNodes
       </ReactFlowProvider>
     </div>
   );
-};
+}
 
 const edgeTypes = {
   custom: SchemaEdge,
 };
 
-const SchemaVisualizerInner: React.FC<SchemaVisualizerProps> = ({ initialNodes, initialEdges }) => {
+function SchemaVisualizerInner({ initialNodes, initialEdges }: SchemaVisualizerProps) {
   const [nodes, _setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
@@ -56,4 +56,4 @@ const SchemaVisualizerInner: React.FC<SchemaVisualizerProps> = ({ initialNodes, 
       </div>
     </div>
   );
-};
+}

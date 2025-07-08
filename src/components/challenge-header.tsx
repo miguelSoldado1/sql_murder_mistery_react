@@ -9,23 +9,23 @@ import {
   BreadcrumbSeparator,
 } from "./ui/breadcrumb";
 
-export const HeaderWrapper: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+export function HeaderWrapper({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn("space-y-4", className)} {...props} />;
-};
+}
 
-export const HeaderTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className, ...props }) => {
+export function HeaderTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return <h1 className={cn("text-2xl font-bold", className)} {...props} />;
-};
+}
 
-export const HeaderDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = (props) => {
+export function HeaderDescription(props: React.HTMLAttributes<HTMLParagraphElement>) {
   return <p {...props} />;
-};
+}
 
 interface HeaderBreadcrumbProps {
   children: React.ReactNode;
 }
 
-export const HeaderBreadcrumb: React.FC<HeaderBreadcrumbProps> = ({ children }) => {
+export function HeaderBreadcrumb({ children }: HeaderBreadcrumbProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList className="text-xl md:text-2xl">
@@ -39,4 +39,4 @@ export const HeaderBreadcrumb: React.FC<HeaderBreadcrumbProps> = ({ children }) 
       </BreadcrumbList>
     </Breadcrumb>
   );
-};
+}

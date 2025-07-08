@@ -7,7 +7,7 @@ import { initialEdges, initialNodes } from "@/schema/murder_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
-const App = () => {
+function MurderMysteryII() {
   const db = useDatabase("/murder_mystery.db");
 
   return (
@@ -41,14 +41,14 @@ const App = () => {
       </SqlQuery>
       <SqlQuery db={db}>
         <SqlQueryHeader>
-          <SqlQueryTitle>Find who commited the murder</SqlQueryTitle>
+          <SqlQueryTitle>Find who committed the murder</SqlQueryTitle>
           <SqlQueryDescription>When you think you know the answer, go to the next section.</SqlQueryDescription>
         </SqlQueryHeader>
       </SqlQuery>
       <SolutionInput solutions={solutions} />
     </section>
   );
-};
+}
 
 const solutions: Solution[] = [
   {
@@ -64,5 +64,5 @@ const solutions: Solution[] = [
 ];
 
 export const Route = createFileRoute("/murder_mystery_ii")({
-  component: App,
+  component: MurderMysteryII,
 });

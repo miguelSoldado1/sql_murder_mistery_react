@@ -10,7 +10,7 @@ const challenges: Challenge[] = [
   { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
 ];
 
-const App = () => {
+function App() {
   return (
     <section className="space-y-12">
       <div className="space-y-4">
@@ -49,7 +49,7 @@ const App = () => {
       </div>
     </section>
   );
-};
+}
 
 export const Route = createFileRoute("/")({
   component: App,
