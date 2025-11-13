@@ -1,3 +1,5 @@
+import type { LinkProps } from "@tanstack/react-router";
+
 export interface Solution {
   solution: string;
   text: string;
@@ -5,6 +7,6 @@ export interface Solution {
 }
 
 export interface Challenge {
-  href: string;
+  href: LinkProps["to"];
   title: string;
 }

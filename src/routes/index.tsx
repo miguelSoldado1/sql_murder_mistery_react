@@ -8,6 +8,7 @@ import type { Challenge } from "@/types";
 const challenges: Challenge[] = [
   { href: "/murder_mystery_i", title: "SQL Murder Mystery I" },
   { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
+  { href: "/cyberpunk_mystery_i", title: "Cyberpunk Mystery I" },
 ];
 
 function App() {

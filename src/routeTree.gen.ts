@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as MurdermysteryiiImport } from './routes/murder_mystery_ii'
 import { Route as MurdermysteryiImport } from './routes/murder_mystery_i'
+import { Route as CyberpunkmysteryiImport } from './routes/cyberpunk_mystery_i'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -24,6 +25,11 @@ const MurdermysteryiiRoute = MurdermysteryiiImport.update({
 
 const MurdermysteryiRoute = MurdermysteryiImport.update({
   path: '/murder_mystery_i',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CyberpunkmysteryiRoute = CyberpunkmysteryiImport.update({
+  path: '/cyberpunk_mystery_i',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -41,6 +47,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/cyberpunk_mystery_i': {
+      id: '/cyberpunk_mystery_i'
+      path: '/cyberpunk_mystery_i'
+      fullPath: '/cyberpunk_mystery_i'
+      preLoaderRoute: typeof CyberpunkmysteryiImport
       parentRoute: typeof rootRoute
     }
     '/murder_mystery_i': {
@@ -64,12 +77,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
@@ -77,27 +92,39 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/murder_mystery_i' | '/murder_mystery_ii'
+  fullPaths:
+    | '/'
+    | '/cyberpunk_mystery_i'
+    | '/murder_mystery_i'
+    | '/murder_mystery_ii'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/murder_mystery_i' | '/murder_mystery_ii'
-  id: '__root__' | '/' | '/murder_mystery_i' | '/murder_mystery_ii'
+  to: '/' | '/cyberpunk_mystery_i' | '/murder_mystery_i' | '/murder_mystery_ii'
+  id:
+    | '__root__'
+    | '/'
+    | '/cyberpunk_mystery_i'
+    | '/murder_mystery_i'
+    | '/murder_mystery_ii'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CyberpunkmysteryiRoute: typeof CyberpunkmysteryiRoute
   MurdermysteryiRoute: typeof MurdermysteryiRoute
   MurdermysteryiiRoute: typeof MurdermysteryiiRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CyberpunkmysteryiRoute: CyberpunkmysteryiRoute,
   MurdermysteryiRoute: MurdermysteryiRoute,
   MurdermysteryiiRoute: MurdermysteryiiRoute,
 }
@@ -115,12 +142,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/cyberpunk_mystery_i",
         "/murder_mystery_i",
         "/murder_mystery_ii"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/cyberpunk_mystery_i": {
+      "filePath": "cyberpunk_mystery_i.tsx"
     },
     "/murder_mystery_i": {
       "filePath": "murder_mystery_i.tsx"
