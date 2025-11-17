@@ -22,18 +22,14 @@ describe("Murder Mystery II", () => {
   });
 
   it("should find the murderer Derek Johnson", () => {
-    // Query based on witness descriptions: black hair, 68 inches tall, drives a Dodge Charger, checked in the night of the murder
+    // Query based on witness descriptions: black hair, 68 inches tall, drives a Dodge Charger
     const result = db.exec(`
       SELECT p.name
       FROM person p
-      JOIN drivers_license dl ON p.license_id = dl.id
-      JOIN get_fit_now_member gfnm ON p.id = gfnm.person_id
-      JOIN get_fit_now_check_in gfnci ON gfnm.id = gfnci.membership_id
-      WHERE dl.hair_color = 'black'
-        AND dl.height = 68
-        AND dl.car_make = 'Dodge'
+      INNER JOIN drivers_license dl ON dl.id = p.license_id
+      WHERE dl.height = 68
+        AND dl.hair_color = 'black'
         AND dl.car_model = 'Charger'
-        AND gfnci.check_in_date = 20180114
     `);
     expect(result[0].values).toHaveLength(1);
     expect(result[0].values[0][0]).toBe("Derek Johnson");
@@ -44,12 +40,11 @@ describe("Murder Mystery II", () => {
     const result = db.exec(`
       SELECT p.name
       FROM person p
-      JOIN drivers_license dl ON p.license_id = dl.id
-      JOIN facebook_event_checkin fec ON p.id = fec.person_id
-      JOIN income inc ON p.ssn = inc.ssn
-      WHERE p.address_street_name = 'Elm Street'
-        AND fec.event_name = 'Business Networking Mixer'
-        AND dl.car_make = 'BMW'
+      INNER JOIN drivers_license dl ON dl.id = p.license_id
+      INNER JOIN facebook_event_checkin ci ON ci.person_id = p.id
+      WHERE dl.car_make = 'BMW'
+        AND p.address_street_name = 'Elm Street'
+        AND ci.event_name = 'Business Networking Mixer'
     `);
     expect(result[0].values).toHaveLength(1);
     expect(result[0].values[0][0]).toBe("Victoria Stone");

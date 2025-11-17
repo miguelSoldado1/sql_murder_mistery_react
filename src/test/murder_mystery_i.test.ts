@@ -22,18 +22,15 @@ describe("Murder Mystery I", () => {
   });
 
   it("should find the murderer Jeremy Bowers", () => {
-    // Query based on crime scene report clues: murder on Jan 15, 2018 in SQL City
-    // Witnesses saw a man with "Get Fit Now" bag, gold membership, plate number including "H42W"
+    // Query based on witness descriptions: Get Fit Now Gym bag with membership starting with "48Z", gold member, plate number including "H42W"
     const result = db.exec(`
       SELECT p.name
       FROM person p
-      JOIN drivers_license dl ON p.license_id = dl.id
-      JOIN get_fit_now_member gfnm ON p.id = gfnm.person_id
-      JOIN get_fit_now_check_in gfnci ON gfnm.id = gfnci.membership_id
-      WHERE gfnci.check_in_date = 20180109
-      AND gfnm.membership_status = 'gold'
-      AND dl.plate_number LIKE '%H42W%'
-      AND dl.gender = 'male'
+      INNER JOIN drivers_license dl ON dl.id = p.license_id
+      INNER JOIN get_fit_now_member gfnm ON gfnm.person_id = p.id
+      WHERE dl.plate_number LIKE '%H42W%'
+        AND gfnm.membership_status = 'gold'
+        AND gfnm.id LIKE '48Z%'
     `);
     expect(result[0].values).toHaveLength(1);
     expect(result[0].values[0][0]).toBe("Jeremy Bowers");
