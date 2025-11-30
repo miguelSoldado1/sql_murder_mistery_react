@@ -9,9 +9,8 @@ describe("Cyberpunk Mystery I", () => {
 
   beforeAll(async () => {
     const SQL = await initSqlJs();
-    const sqlScript = fs.readFileSync(path.join(__dirname, "../../scripts/cyberpunk_full.sql"), "utf8");
-    db = new SQL.Database();
-    db.run(sqlScript);
+    const fileBuffer = fs.readFileSync(path.join(__dirname, "../../public/cyberpunk_mystery.db"));
+    db = new SQL.Database(fileBuffer);
   });
 
   afterAll(() => {
