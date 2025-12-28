@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as MurdermysteryiiImport } from './routes/murder_mystery_ii'
 import { Route as MurdermysteryiImport } from './routes/murder_mystery_i'
+import { Route as CyberpunkmysteryiiImport } from './routes/cyberpunk_mystery_ii'
 import { Route as CyberpunkmysteryiImport } from './routes/cyberpunk_mystery_i'
 import { Route as IndexImport } from './routes/index'
 
@@ -25,6 +26,11 @@ const MurdermysteryiiRoute = MurdermysteryiiImport.update({
 
 const MurdermysteryiRoute = MurdermysteryiImport.update({
   path: '/murder_mystery_i',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CyberpunkmysteryiiRoute = CyberpunkmysteryiiImport.update({
+  path: '/cyberpunk_mystery_ii',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -56,6 +62,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CyberpunkmysteryiImport
       parentRoute: typeof rootRoute
     }
+    '/cyberpunk_mystery_ii': {
+      id: '/cyberpunk_mystery_ii'
+      path: '/cyberpunk_mystery_ii'
+      fullPath: '/cyberpunk_mystery_ii'
+      preLoaderRoute: typeof CyberpunkmysteryiiImport
+      parentRoute: typeof rootRoute
+    }
     '/murder_mystery_i': {
       id: '/murder_mystery_i'
       path: '/murder_mystery_i'
@@ -78,6 +91,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
+  '/cyberpunk_mystery_ii': typeof CyberpunkmysteryiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
@@ -85,6 +99,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
+  '/cyberpunk_mystery_ii': typeof CyberpunkmysteryiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
@@ -93,6 +108,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/cyberpunk_mystery_i': typeof CyberpunkmysteryiRoute
+  '/cyberpunk_mystery_ii': typeof CyberpunkmysteryiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
 }
@@ -102,14 +118,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cyberpunk_mystery_i'
+    | '/cyberpunk_mystery_ii'
     | '/murder_mystery_i'
     | '/murder_mystery_ii'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cyberpunk_mystery_i' | '/murder_mystery_i' | '/murder_mystery_ii'
+  to:
+    | '/'
+    | '/cyberpunk_mystery_i'
+    | '/cyberpunk_mystery_ii'
+    | '/murder_mystery_i'
+    | '/murder_mystery_ii'
   id:
     | '__root__'
     | '/'
     | '/cyberpunk_mystery_i'
+    | '/cyberpunk_mystery_ii'
     | '/murder_mystery_i'
     | '/murder_mystery_ii'
   fileRoutesById: FileRoutesById
@@ -118,6 +141,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CyberpunkmysteryiRoute: typeof CyberpunkmysteryiRoute
+  CyberpunkmysteryiiRoute: typeof CyberpunkmysteryiiRoute
   MurdermysteryiRoute: typeof MurdermysteryiRoute
   MurdermysteryiiRoute: typeof MurdermysteryiiRoute
 }
@@ -125,6 +149,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CyberpunkmysteryiRoute: CyberpunkmysteryiRoute,
+  CyberpunkmysteryiiRoute: CyberpunkmysteryiiRoute,
   MurdermysteryiRoute: MurdermysteryiRoute,
   MurdermysteryiiRoute: MurdermysteryiiRoute,
 }
@@ -143,6 +168,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/cyberpunk_mystery_i",
+        "/cyberpunk_mystery_ii",
         "/murder_mystery_i",
         "/murder_mystery_ii"
       ]
@@ -152,6 +178,9 @@ export const routeTree = rootRoute
     },
     "/cyberpunk_mystery_i": {
       "filePath": "cyberpunk_mystery_i.tsx"
+    },
+    "/cyberpunk_mystery_ii": {
+      "filePath": "cyberpunk_mystery_ii.tsx"
     },
     "/murder_mystery_i": {
       "filePath": "murder_mystery_i.tsx"
