@@ -60,7 +60,7 @@ const solutions: Solution[] = [
   },
   {
     solution: "rysa kade",
-    text: "You found the insider. One last step: query Rysa's interrogation notes and follow the money. The payer received TWO transfers (50,000 NeoCoin and 20,000 LuminaCredit) and is a Lead Scientist in the Research Ring with four implants.",
+    text: "You found the insider. One last step: query Rysa's interrogation logs and follow the money.",
     final: false,
   },
   {
