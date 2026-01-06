@@ -21,6 +21,14 @@ describe("Murder Mystery I", () => {
     }
   });
 
+  it("description narrows to one incident for Murder Mystery I", () => {
+    const res = db.exec(`
+      SELECT * FROM crime_scene_report
+      WHERE type = 'murder' AND date = 20180115 AND city = 'SQL City'
+    `);
+    expect(res[0].values).toHaveLength(1);
+  });
+
   it("should find the murderer Jeremy Bowers", () => {
     // Query based on witness descriptions: Get Fit Now Gym bag with membership starting with "48Z", gold member, plate number including "H42W"
     const result = db.exec(`

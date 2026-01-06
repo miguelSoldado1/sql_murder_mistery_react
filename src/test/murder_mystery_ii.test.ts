@@ -21,6 +21,14 @@ describe("Murder Mystery II", () => {
     }
   });
 
+  it("description narrows to one incident for Murder Mystery II", () => {
+    const res = db.exec(`
+      SELECT * FROM crime_scene_report
+      WHERE type = 'murder' AND date = 20180114 AND city = 'SQL City'
+    `);
+    expect(res[0].values).toHaveLength(1);
+  });
+
   it("should list the gym witness from the camera description", () => {
     // Camera witness: gym member, brown hair, 70 inches tall, drives a Honda Civic
     const result = db.exec(`

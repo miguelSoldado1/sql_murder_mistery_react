@@ -19,6 +19,14 @@ describe("Cyberpunk Mystery I", () => {
     }
   });
 
+  it("description narrows to one incident for Cyberpunk Mystery I", () => {
+    const res = db.exec(`
+      SELECT * FROM incident_report
+      WHERE date = 21470220 AND type = 'theft' AND description LIKE '%AI Core%'
+    `);
+    expect(res[0].values).toHaveLength(1);
+  });
+
   it("should find the hacker Jax Nova using incident report clues", () => {
     // Query based on incident report: hacker with 5 neural implants, Neural Deck, >3 anomalies, in Sector 7 on 21470220
     const result = db.exec(`

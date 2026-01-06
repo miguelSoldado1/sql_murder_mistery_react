@@ -19,6 +19,14 @@ describe("Cyberpunk Mystery II", () => {
     }
   });
 
+  it("description narrows to one incident for Cyberpunk Mystery II", () => {
+    const res = db.exec(`
+      SELECT * FROM incident_report
+      WHERE date = 21470301 AND description LIKE '%Failsafe collapsed%'
+    `);
+    expect(res[0].values).toHaveLength(1);
+  });
+
   it("should find the ghost-drive runner Shade Fathom using incident and implant clues", () => {
     // Clues (incident briefing): Ghost Deck with 6 anomalies; runner is a Neural Broker in Sector 9;
     // implant sync shows no sync for 10+ days (last_sync on/before 21470220)
