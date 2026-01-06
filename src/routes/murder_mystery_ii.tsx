@@ -13,7 +13,7 @@ function MurderMysteryII() {
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>SQL Murder Mystery II: The Midnight Gym Murder</HeaderBreadcrumb>
+        <HeaderBreadcrumb>SQL Murder Mystery II</HeaderBreadcrumb>
         <HeaderDescription>
           Another crime has occurred and the detective needs your help once again. You've been handed a case file, but some
           crucial details are missing. You remember that the <strong>crime was a murder</strong> that occurred on

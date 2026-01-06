@@ -21,6 +21,34 @@ describe("Murder Mystery II", () => {
     }
   });
 
+  it("should list the gym witness from the camera description", () => {
+    // Camera witness: gym member, brown hair, 70 inches tall, drives a Honda Civic
+    const result = db.exec(`
+      SELECT p.name
+      FROM person p
+      INNER JOIN drivers_license dl ON dl.id = p.license_id
+      INNER JOIN get_fit_now_member gfn ON gfn.person_id = p.id
+      WHERE dl.hair_color = 'brown'
+        AND dl.height = 70
+        AND dl.car_make = 'Honda'
+        AND dl.car_model = 'Civic'
+    `);
+    expect(result[0].values).toHaveLength(1);
+    expect(result[0].values[0][0]).toBe("Marcus Williams");
+  });
+
+  it("should list the license-plate witness from the camera description", () => {
+    // Camera witness: license plate WHT789
+    const result = db.exec(`
+      SELECT p.name
+      FROM person p
+      INNER JOIN drivers_license dl ON dl.id = p.license_id
+      WHERE dl.plate_number = 'WHT789'
+    `);
+    expect(result[0].values).toHaveLength(1);
+    expect(result[0].values[0][0]).toBe("Sophie Chen");
+  });
+
   it("should find the murderer Derek Johnson", () => {
     // Query based on witness descriptions: black hair, 68 inches tall, drives a Dodge Charger
     const result = db.exec(`
