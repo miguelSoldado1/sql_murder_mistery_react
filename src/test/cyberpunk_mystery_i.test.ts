@@ -39,6 +39,21 @@ describe("Cyberpunk Mystery I", () => {
     expect(result[0].values[0][0]).toBe("Jax Nova");
   });
 
+  it("should find the insider Lira Kane from payment and implant clues", () => {
+    const result = db.exec(`
+      SELECT p.name
+      FROM person p
+      INNER JOIN crypto_transaction ct ON ct.person_id = p.id
+      INNER JOIN neural_implant ni ON ni.person_id = p.id
+      WHERE ct.amount = '30000'
+        AND ct.crypto_type = 'CryptoByte'
+        AND ni.cyberware_type = 'Access Implant'
+    `);
+    expect(result).toHaveLength(1);
+    expect(result[0].values).toHaveLength(1);
+    expect(result[0].values[0][0]).toBe("Lira Kane");
+  });
+
   it("should find the insider Lira Kane using interrogation clues", () => {
     // Query based on Jax's interrogation: insider who paid 30000 CryptoByte, used Access Implant, spotted in Sector 7
     const result = db.exec(`
