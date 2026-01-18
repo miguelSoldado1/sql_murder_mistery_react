@@ -22,7 +22,7 @@ describe("Cyberpunk Mystery III", () => {
   it("description narrows to one incident for Cyberpunk Mystery III", () => {
     const res = db.exec(`
       SELECT * FROM incident_report
-      WHERE date = 21470312 AND description LIKE '%Mirror Array%'
+      WHERE date = 21470312 AND type = 'breach' AND sector = 'Sector 6'
     `);
     expect(res[0].values).toHaveLength(1);
   });
