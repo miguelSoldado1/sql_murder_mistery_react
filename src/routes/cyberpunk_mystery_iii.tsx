@@ -15,9 +15,11 @@ function CyberpunkMysteryIII() {
       <HeaderWrapper>
         <HeaderBreadcrumb>Cyberpunk Mystery III</HeaderBreadcrumb>
         <HeaderDescription>
-          The Mirror Array in Neo-Tokyo was hijacked during a blackout, and the case file is missing the key specifics. Start
-          by retrieving the incident report to recover the details, then use device telemetry, implant records, and
-          interrogation logs to identify the runner, the insider, and the executive sponsor.
+          The Mirror Array in Neo-Tokyo was hijacked during a blackout, and the case file is missing the key specifics. You
+          remember that the incident was a <strong>breach</strong> that occurred on <strong>March 12, 2147</strong> and that
+          it took place in <strong>Sector 6</strong>. Start by retrieving the incident report to recover the details, then
+          use device telemetry, implant records, and interrogation logs to identify the runner, the insider, and the
+          executive sponsor.
         </HeaderDescription>
         <SchemaVisualizer initialNodes={initialNodes} initialEdges={initialEdges} />
       </HeaderWrapper>
