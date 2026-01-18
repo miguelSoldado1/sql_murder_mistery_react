@@ -166,7 +166,7 @@ group by p.id having count(ni.id) = 4
 
 ### Clues
 
-The Mirror Array in Neo-Tokyo was hijacked during a blackout, and the case file is missing the key specifics. Start by retrieving the incident report to recover the details, then use device telemetry, implant records, and interrogation logs to identify the runner, the insider, and the executive sponsor.
+The Mirror Array in Neo-Tokyo was hijacked during a blackout, and the case file is missing the key specifics. You remember that the incident was a breach that occurred on March 12, 2147 and that it took place in Sector 6. Start by retrieving the incident report to recover the details, then use device telemetry, implant records, and interrogation logs to identify the runner, the insider, and the executive sponsor.
 
 Mirror Array breach in Sector 6. Twin telemetry signatures detected: a Ghost Deck with six anomalies and a Neural Deck with four anomalies. The runner is a Neural Broker with five implants; last implant sync on or before March 1, 2147.
 
@@ -188,7 +188,7 @@ with devices as (
 	inner join neural_implant ni on ni.person_id = p.id
 	where dl.anomaly_count = 6 and d.device_type = 'Ghost Deck' and p.role = 'Neural Broker' and ni.last_sync <= 21470301
 	group by (p.id)
-	having count (ni.id) = 5
+	having count (distinct ni.id) = 5
 	union
 	select p.id from person p
 	inner join device d on d.person_id = p.id
@@ -196,7 +196,7 @@ with devices as (
 	inner join neural_implant ni on ni.person_id = p.id
 	where dl.anomaly_count = 4 and d.device_type = 'Neural Deck' and p.role = 'Neural Broker' and ni.last_sync <= 21470301
 	group by (p.id)
-	having count (ni.id) = 5
+	having count (distinct ni.id) = 5
 )
 
 select * from person p
@@ -205,7 +205,7 @@ inner join neural_implant ni on ni.person_id = p.id
 inner join location_log ll on ll.person_id = p.id
 where ni.last_sync <= 21470301 and p.role = 'Neural Broker' and ll.sector = 'Sector 6'
 group by(p.id)
-having count (ni.id) = 5
+having count (distinct ni.id) = 5
 ```
 
 ```sql
