@@ -10,6 +10,7 @@ const challenges: Challenge[] = [
   { href: "/murder_mystery_ii", title: "SQL Murder Mystery II" },
   { href: "/cyberpunk_mystery_i", title: "Cyberpunk Mystery I" },
   { href: "/cyberpunk_mystery_ii", title: "Cyberpunk Mystery II" },
+  { href: "/cyberpunk_mystery_iii", title: "Cyberpunk Mystery III" },
 ];
 
 function App() {
