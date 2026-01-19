@@ -16,9 +16,11 @@ function UnderseaMysteryI() {
         <HeaderBreadcrumb>Undersea Mystery I</HeaderBreadcrumb>
         <HeaderDescription>
           A replacement pump never arrived, and the station is humming a worried tune after an alleged <strong>theft</strong>
-          . Start by finding the incident report from <strong>July 18, 2091</strong>, then use that report&apos;s details to
-          identify the onsite actor, the handler who filed the manifest edit, and the senior engineer who approved the
-          overrides.
+          . Begin by locating the incident report dated <strong>July 18, 2091</strong>. Once you have the report, comb
+          through its timeline and attachments to extract the onsite actor involved, the cargo handler who submitted the
+          manifest edit, and the senior engineer who signed off on the override approvals. Pay close attention to timestamps
+          and change notes, they often reveal the chain of responsibility and small inconsistencies that point to the real
+          culprit.
         </HeaderDescription>
         <SchemaVisualizer initialNodes={initialNodes} initialEdges={initialEdges} />
       </HeaderWrapper>
