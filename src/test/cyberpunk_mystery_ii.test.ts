@@ -9,7 +9,7 @@ describe("Cyberpunk Mystery II", () => {
 
   beforeAll(async () => {
     const SQL = await initSqlJs();
-    const fileBuffer = fs.readFileSync(path.join(__dirname, "../../public/cyberpunk_mystery.db"));
+    const fileBuffer = fs.readFileSync(path.join(__dirname, "../../public/database/cyberpunk_mystery.db"));
     db = new SQL.Database(fileBuffer);
   });
 

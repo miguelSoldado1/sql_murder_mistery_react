@@ -10,7 +10,7 @@ describe("Murder Mystery I", () => {
   beforeAll(async () => {
     const SQL = await initSqlJs();
     // Load the murder mystery database
-    const dbPath = path.join(__dirname, "../../public/murder_mystery.db");
+    const dbPath = path.join(__dirname, "../../public/database/murder_mystery.db");
     const filebuffer = fs.readFileSync(dbPath);
     db = new SQL.Database(filebuffer);
   });

@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
 function UnderseaMysteryI() {
-  const db = useDatabase("/undersea_mystery.db");
+  const db = useDatabase("/database/undersea_mystery.db");
 
   return (
     <section className="space-y-12">
