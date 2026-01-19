@@ -17,7 +17,7 @@ function App() {
   return (
     <section className="space-y-12">
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold md:text-3xl">SQL Challenges</h1>
+        <h1 className="text-2xl font-semibold md:text-3xl">SQL Cold Cases</h1>
         <p>
           Inspired by the classic{" "}
           <a href="https://mystery.knightlab.com/" className="text-primary underline hover:text-muted-foreground">
@@ -31,7 +31,7 @@ function App() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="font-semibold">challenge</TableHead>
+              <TableHead className="font-semibold">case</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
