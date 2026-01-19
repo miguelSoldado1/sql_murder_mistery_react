@@ -29,20 +29,18 @@ describe("Undersea Mystery I", () => {
 
   it("should find the onsite actor Mira Alcott using intake and access clues", () => {
     // Clues: Type-K coolant crate logged during 05:00–06:00 intake window in Intake Bay A;
-    // the label swapper was a Cargo Handler assigned to Intake Bay A who swiped in during the window.
+    // the label swapper was a Cargo Handler assigned to Intake Bay A who gained access twice during the window.
     const result = db.exec(`
       SELECT p.name
-      FROM shipment s
-      JOIN cargo_item ci ON s.id = ci.shipment_id
-      JOIN access_log al ON al.module = s.bay
-      JOIN personnel p ON p.id = al.person_id
-      WHERE ci.label = 'Type-K coolant crate'
-        AND s.bay = 'Intake Bay A'
-        AND s.intake_time BETWEEN 209107180500 AND 209107180600
-        AND al.timestamp BETWEEN 209107180500 AND 209107180600
-        AND p.role = 'Cargo Handler'
+      FROM person p
+      JOIN access_log al ON al.person_id = p.id
+      WHERE p.role = 'Cargo Handler'
         AND p.module = 'Intake Bay A'
+        AND al.module = 'Intake Bay A'
+        AND al.date = 20910718
+        AND al.timestamp BETWEEN 500 AND 600
       GROUP BY p.id, p.name
+      HAVING COUNT(al.person_id) = 2
     `);
 
     expect(result).toHaveLength(1);
@@ -55,7 +53,7 @@ describe("Undersea Mystery I", () => {
     const result = db.exec(`
       SELECT p.name
       FROM work_order wo
-      JOIN personnel p ON p.id = wo.person_id
+      JOIN person p ON p.id = wo.person_id
       WHERE wo.work_type = 'manifest edit'
         AND wo.shipment_id = 7002
         AND p.role = 'Logistics Tech'
@@ -73,7 +71,7 @@ describe("Undersea Mystery I", () => {
     const result = db.exec(`
       SELECT p.name
       FROM override_approval oa
-      JOIN personnel p ON p.id = oa.approver_id
+      JOIN person p ON p.id = oa.person_id
       WHERE oa.module = 'Intake Bay A'
         AND oa.override_type = 'expedite'
         AND oa.date BETWEEN 20910715 AND 20910721
@@ -84,6 +82,6 @@ describe("Undersea Mystery I", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0].values).toHaveLength(1);
-    expect(result[0].values[0][0]).toBe("Dr. Selene Ward");
+    expect(result[0].values[0][0]).toBe("Avery Holt");
   });
 });

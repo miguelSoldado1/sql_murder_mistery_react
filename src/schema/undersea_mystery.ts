@@ -4,7 +4,7 @@ export const initialNodes: Node[] = [
   {
     id: "incident_report",
     type: "tableNode",
-    position: { x: -760, y: 20 },
+    position: { x: -100, y: 60 },
     data: {
       label: "incident_report",
       fields: [
@@ -18,7 +18,7 @@ export const initialNodes: Node[] = [
   {
     id: "interrogation_log",
     type: "tableNode",
-    position: { x: 260, y: 260 },
+    position: { x: 640, y: 320 },
     data: {
       label: "interrogation_log",
       fields: [
@@ -29,11 +29,11 @@ export const initialNodes: Node[] = [
     },
   },
   {
-    id: "personnel",
+    id: "person",
     type: "tableNode",
-    position: { x: -120, y: 260 },
+    position: { x: -360, y: 260 },
     data: {
-      label: "personnel",
+      label: "person",
       fields: [
         { name: "id", type: "integer", isPrimary: true, handlePosition: "right" },
         { name: "name", type: "text" },
@@ -45,12 +45,14 @@ export const initialNodes: Node[] = [
   {
     id: "access_log",
     type: "tableNode",
-    position: { x: 260, y: 20 },
+    position: { x: 640, y: 20 },
     data: {
       label: "access_log",
       fields: [
+        { name: "id", type: "integer", isPrimary: true },
         { name: "person_id", type: "integer", isForeign: true, handlePosition: "left" },
         { name: "module", type: "text" },
+        { name: "date", type: "integer" },
         { name: "timestamp", type: "integer" },
         { name: "action", type: "text" },
       ],
@@ -73,12 +75,12 @@ export const initialNodes: Node[] = [
   {
     id: "cargo_item",
     type: "tableNode",
-    position: { x: -420, y: 520 },
+    position: { x: -760, y: 150 },
     data: {
       label: "cargo_item",
       fields: [
         { name: "id", type: "integer", isPrimary: true },
-        { name: "shipment_id", type: "integer", isForeign: true, handlePosition: "left" },
+        { name: "shipment_id", type: "integer", isForeign: true, handlePosition: "right" },
         { name: "label", type: "text" },
         { name: "item_type", type: "text" },
         { name: "quantity", type: "integer" },
@@ -88,7 +90,7 @@ export const initialNodes: Node[] = [
   {
     id: "work_order",
     type: "tableNode",
-    position: { x: 260, y: 520 },
+    position: { x: 80, y: 520 },
     data: {
       label: "work_order",
       fields: [
@@ -109,7 +111,7 @@ export const initialNodes: Node[] = [
       label: "override_approval",
       fields: [
         { name: "id", type: "integer", isPrimary: true },
-        { name: "approver_id", type: "integer", isForeign: true, handlePosition: "left" },
+        { name: "person_id", type: "integer", isForeign: true, handlePosition: "left" },
         { name: "module", type: "text" },
         { name: "override_type", type: "text" },
         { name: "date", type: "integer" },
@@ -120,15 +122,15 @@ export const initialNodes: Node[] = [
 
 export const initialEdges: Edge[] = [
   {
-    id: "personnel-interrogation_log",
-    source: "personnel",
+    id: "person-interrogation_log",
+    source: "person",
     target: "interrogation_log",
     sourceHandle: "id",
     targetHandle: "person_id",
   },
   {
-    id: "personnel-access_log",
-    source: "personnel",
+    id: "person-access_log",
+    source: "person",
     target: "access_log",
     sourceHandle: "id",
     targetHandle: "person_id",
@@ -141,8 +143,8 @@ export const initialEdges: Edge[] = [
     targetHandle: "shipment_id",
   },
   {
-    id: "personnel-work_order",
-    source: "personnel",
+    id: "person-work_order",
+    source: "person",
     target: "work_order",
     sourceHandle: "id",
     targetHandle: "person_id",
@@ -155,10 +157,10 @@ export const initialEdges: Edge[] = [
     targetHandle: "shipment_id",
   },
   {
-    id: "personnel-override_approval",
-    source: "personnel",
+    id: "person-override_approval",
+    source: "person",
     target: "override_approval",
     sourceHandle: "id",
-    targetHandle: "approver_id",
+    targetHandle: "person_id",
   },
 ];

@@ -15,10 +15,10 @@ function UnderseaMysteryI() {
       <HeaderWrapper>
         <HeaderBreadcrumb>Undersea Mystery I</HeaderBreadcrumb>
         <HeaderDescription>
-          A replacement pump never arrived. It was logged as a <strong>Type-K coolant crate</strong> during the
-          <strong> 05:00–06:00 intake window</strong> in <strong>Intake Bay A</strong> on <strong>July 18, 2091</strong>. Use
-          the intake records, access logs, and work orders to identify the onsite actor, the handler who filed the manifest
-          edit, and the senior engineer who approved the overrides.
+          A replacement pump never arrived, and the station is humming a worried tune after an alleged <strong>theft</strong>
+          . Start by finding the incident report from <strong>July 18, 2091</strong>, then use that report&apos;s details to
+          identify the onsite actor, the handler who filed the manifest edit, and the senior engineer who approved the
+          overrides.
         </HeaderDescription>
         <SchemaVisualizer initialNodes={initialNodes} initialEdges={initialEdges} />
       </HeaderWrapper>
@@ -55,17 +55,17 @@ function UnderseaMysteryI() {
 const solutions: Solution[] = [
   {
     solution: "mira alcott",
-    text: "Good start. Now use Mira&apos;s interrogation transcript to find the Logistics Tech in Module C-1 who filed the manifest edit for the shipment.",
+    text: "Good start. Now use Mira's interrogation transcript to find the Logistics Tech in Module C-1 who filed the manifest edit for the shipment.",
     final: false,
   },
   {
     solution: "jonas pike",
-    text: "You found the handler. Next, use Jonas&apos;s transcript to identify the Senior Engineer who approved two expedite overrides for Intake Bay A that week.",
+    text: "You found the handler. Next, use Jonas's transcript to identify the Senior Engineer who approved two expedite overrides for Intake Bay A that week.",
     final: false,
   },
   {
-    solution: "dr. selene ward",
-    text: "Case closed. The cargo mislabel was ordered from above, and you traced the approvals back to Dr. Selene Ward.",
+    solution: "avery holt",
+    text: "Case closed. The cargo mislabel was ordered from above, and you traced the approvals back to Avery Holt.",
     final: true,
   },
 ];
