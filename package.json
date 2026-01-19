@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prettier": "prettier src/**/*.{ts,tsx} --write",
+    "format": "prettier --write .",
     "test": "vitest"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "prettier": "^3.7.4",
     "@eslint/js": "^9.9.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@tanstack/router-devtools": "^1.58.3",
