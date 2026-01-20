@@ -237,3 +237,51 @@ where dl.anomaly_count = 2 and role = 'Exec' and p.sector = 'Corporate'
 	and d.device_type = 'Command Unit' and ni.cyberware_type = 'Directive Stack'
 group by(p.id)
 ```
+
+## Undersea Mystery I
+
+### Clues
+
+A replacement pump never arrived, and the station is humming a worried tune after an alleged theft. Start by finding the incident report from July 18, 2091, then use that report's details to identify the onsite actor, the handler who filed the manifest edit, and the senior engineer who approved the overrides.
+
+A replacement pump went missing. It was labeled as a Type-K coolant crate during the 05:00–06:00 intake window in Intake Bay A. The label swapper was a Cargo Handler who gained access to Intake Bay A twice during that window.
+
+I swapped the label, but I did not plan it. A Logistics Tech in Module C-1 told me to do it and filed a manifest edit ticket for shipment 7002.
+
+The request came from a Senior Engineer who approved two expedite overrides for Intake Bay A between July 15 and July 21, 2091.
+
+### Queries
+
+```sql
+select * from incident_report where date = 20910718 and type = 'theft'
+```
+
+```sql
+select * from person p
+inner join access_log al on al.person_id = p.id
+where p.role = 'Cargo Handler' and al.date = 20910718 and al.timestamp >= 0500 and al.timestamp <= 0600 and al.module = 'Intake Bay A'
+group by (p.id)
+having count(al.id) = 2
+```
+
+```sql
+select * from interrogation_log where person_id = 2155
+```
+
+```sql
+select * from person p
+inner join work_order wo on wo.person_id = p.id
+where p.role = 'Logistics Tech' and p.module = 'Module C-1' and wo.work_type = 'manifest edit' and wo.shipment_id = 7002
+```
+
+```sql
+select * from interrogation_log where person_id = 2156
+```
+
+```sql
+select * from person p
+inner join override_approval ap on ap.person_id = p.id
+where p.role = 'Senior Engineer' and ap.date >= 20910715 and ap.date <= 20910721 and ap.module = 'Intake Bay A'
+group by(p.id)
+having count(ap.id) = 2
+```

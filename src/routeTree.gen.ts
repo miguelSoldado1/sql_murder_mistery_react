@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UnderseamysteryiImport } from './routes/undersea_mystery_i'
 import { Route as MurdermysteryiiImport } from './routes/murder_mystery_ii'
 import { Route as MurdermysteryiImport } from './routes/murder_mystery_i'
 import { Route as CyberpunkmysteryiiiImport } from './routes/cyberpunk_mystery_iii'
@@ -19,6 +20,11 @@ import { Route as CyberpunkmysteryiImport } from './routes/cyberpunk_mystery_i'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const UnderseamysteryiRoute = UnderseamysteryiImport.update({
+  path: '/undersea_mystery_i',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const MurdermysteryiiRoute = MurdermysteryiiImport.update({
   path: '/murder_mystery_ii',
@@ -96,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MurdermysteryiiImport
       parentRoute: typeof rootRoute
     }
+    '/undersea_mystery_i': {
+      id: '/undersea_mystery_i'
+      path: '/undersea_mystery_i'
+      fullPath: '/undersea_mystery_i'
+      preLoaderRoute: typeof UnderseamysteryiImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -108,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/cyberpunk_mystery_iii': typeof CyberpunkmysteryiiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  '/undersea_mystery_i': typeof UnderseamysteryiRoute
 }
 
 export interface FileRoutesByTo {
@@ -117,6 +131,7 @@ export interface FileRoutesByTo {
   '/cyberpunk_mystery_iii': typeof CyberpunkmysteryiiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  '/undersea_mystery_i': typeof UnderseamysteryiRoute
 }
 
 export interface FileRoutesById {
@@ -127,6 +142,7 @@ export interface FileRoutesById {
   '/cyberpunk_mystery_iii': typeof CyberpunkmysteryiiiRoute
   '/murder_mystery_i': typeof MurdermysteryiRoute
   '/murder_mystery_ii': typeof MurdermysteryiiRoute
+  '/undersea_mystery_i': typeof UnderseamysteryiRoute
 }
 
 export interface FileRouteTypes {
@@ -138,6 +154,7 @@ export interface FileRouteTypes {
     | '/cyberpunk_mystery_iii'
     | '/murder_mystery_i'
     | '/murder_mystery_ii'
+    | '/undersea_mystery_i'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -146,6 +163,7 @@ export interface FileRouteTypes {
     | '/cyberpunk_mystery_iii'
     | '/murder_mystery_i'
     | '/murder_mystery_ii'
+    | '/undersea_mystery_i'
   id:
     | '__root__'
     | '/'
@@ -154,6 +172,7 @@ export interface FileRouteTypes {
     | '/cyberpunk_mystery_iii'
     | '/murder_mystery_i'
     | '/murder_mystery_ii'
+    | '/undersea_mystery_i'
   fileRoutesById: FileRoutesById
 }
 
@@ -164,6 +183,7 @@ export interface RootRouteChildren {
   CyberpunkmysteryiiiRoute: typeof CyberpunkmysteryiiiRoute
   MurdermysteryiRoute: typeof MurdermysteryiRoute
   MurdermysteryiiRoute: typeof MurdermysteryiiRoute
+  UnderseamysteryiRoute: typeof UnderseamysteryiRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -173,6 +193,7 @@ const rootRouteChildren: RootRouteChildren = {
   CyberpunkmysteryiiiRoute: CyberpunkmysteryiiiRoute,
   MurdermysteryiRoute: MurdermysteryiRoute,
   MurdermysteryiiRoute: MurdermysteryiiRoute,
+  UnderseamysteryiRoute: UnderseamysteryiRoute,
 }
 
 export const routeTree = rootRoute
@@ -192,7 +213,8 @@ export const routeTree = rootRoute
         "/cyberpunk_mystery_ii",
         "/cyberpunk_mystery_iii",
         "/murder_mystery_i",
-        "/murder_mystery_ii"
+        "/murder_mystery_ii",
+        "/undersea_mystery_i"
       ]
     },
     "/": {
@@ -212,6 +234,9 @@ export const routeTree = rootRoute
     },
     "/murder_mystery_ii": {
       "filePath": "murder_mystery_ii.tsx"
+    },
+    "/undersea_mystery_i": {
+      "filePath": "undersea_mystery_i.tsx"
     }
   }
 }

@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
 function CyberpunkMystery() {
-  const db = useDatabase("/cyberpunk_mystery.db");
+  const db = useDatabase("/database/cyberpunk_mystery.db");
 
   return (
     <section className="space-y-12">

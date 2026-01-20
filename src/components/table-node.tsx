@@ -8,6 +8,7 @@ export interface TableField {
   type: string;
   isPrimary?: boolean;
   isForeign?: boolean;
+  handlePosition?: "left" | "right";
 }
 
 interface TableNodeData extends Record<string, unknown> {
@@ -53,7 +54,11 @@ function TableNodeComponent({ data, id, initialEdges }: TableNodeProps) {
                 (field.isForeign && targetConnections.includes(field.name))) && (
                 <Handle
                   type={field.isPrimary ? "source" : "target"}
-                  position={field.isPrimary ? Position.Left : Position.Right}
+                  position={
+                    (field.handlePosition ?? (field.isPrimary ? "left" : "right")) === "left"
+                      ? Position.Left
+                      : Position.Right
+                  }
                   id={field.name}
                   className="size-2.5 rounded-full border-2 border-background"
                   isConnectable={false}
