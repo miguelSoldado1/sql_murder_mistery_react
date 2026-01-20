@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Footer } from "@/components/footer";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
@@ -8,6 +9,7 @@ function Root() {
         <Outlet />
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 }
