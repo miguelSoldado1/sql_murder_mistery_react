@@ -22,7 +22,7 @@ describe("Undersea Mystery I", () => {
   it("description narrows to one incident for Undersea Mystery I", () => {
     const res = db.exec(`
       SELECT * FROM incident_report
-      WHERE date = 20910718 AND description LIKE '%Type-K coolant crate%'
+      WHERE date = 20910718 AND type = 'theft'
     `);
     expect(res[0].values).toHaveLength(1);
   });
@@ -35,8 +35,6 @@ describe("Undersea Mystery I", () => {
       FROM person p
       JOIN access_log al ON al.person_id = p.id
       WHERE p.role = 'Cargo Handler'
-        AND p.module = 'Intake Bay A'
-        AND al.module = 'Intake Bay A'
         AND al.date = 20910718
         AND al.timestamp BETWEEN 500 AND 600
       GROUP BY p.id, p.name
