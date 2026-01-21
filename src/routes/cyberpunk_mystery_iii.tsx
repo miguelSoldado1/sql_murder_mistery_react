@@ -7,13 +7,16 @@ import { initialEdges, initialNodes } from "@/schema/cyberpunk_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
+const TITLE = "Cyberpunk Mystery III";
+
 function CyberpunkMysteryIII() {
   const db = useDatabase("/database/cyberpunk_mystery.db");
 
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>Cyberpunk Mystery III</HeaderBreadcrumb>
+        <HeaderBreadcrumb>{TITLE}</HeaderBreadcrumb>
+        <h1 className="sr-only">{TITLE}</h1>
         <HeaderDescription>
           The Mirror Array in Neo-Tokyo was hijacked during a blackout, and the case file is missing the key specifics. You
           remember that the incident was a <strong>breach</strong> that occurred on <strong>March 12, 2147</strong> and that

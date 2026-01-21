@@ -7,13 +7,16 @@ import { initialEdges, initialNodes } from "@/schema/cyberpunk_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
+const TITLE = "Cyberpunk Mystery II";
+
 function CyberpunkMysteryII() {
   const db = useDatabase("/database/cyberpunk_mystery.db");
 
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>Cyberpunk Mystery II</HeaderBreadcrumb>
+        <HeaderBreadcrumb>{TITLE}</HeaderBreadcrumb>
+        <h1 className="sr-only">{TITLE}</h1>
         <HeaderDescription>
           Aegis Station went dark and the quantum failsafe failed. You vaguely remember that the incident happened on
           <strong> March 1, 2147</strong>, and that an AI was moved into a <strong>ghost drive</strong> during the blackout.

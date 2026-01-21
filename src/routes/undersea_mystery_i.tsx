@@ -7,13 +7,16 @@ import { initialEdges, initialNodes } from "@/schema/undersea_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
+const TITLE = "Undersea Mystery I";
+
 function UnderseaMysteryI() {
   const db = useDatabase("/database/undersea_mystery.db");
 
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>Undersea Mystery I</HeaderBreadcrumb>
+        <HeaderBreadcrumb>{TITLE}</HeaderBreadcrumb>
+        <h1 className="sr-only">{TITLE}</h1>
         <HeaderDescription>
           A replacement pump never arrived, and the station is humming a worried tune after an alleged <strong>theft</strong>
           . Begin by locating the incident report dated <strong>July 18, 2091</strong>. Once you have the report, comb

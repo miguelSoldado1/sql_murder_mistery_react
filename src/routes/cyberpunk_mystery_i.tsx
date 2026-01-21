@@ -7,13 +7,16 @@ import { initialEdges, initialNodes } from "@/schema/cyberpunk_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
+const TITLE = "Cyberpunk Mystery I";
+
 function CyberpunkMystery() {
   const db = useDatabase("/database/cyberpunk_mystery.db");
 
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>Cyberpunk Mystery I</HeaderBreadcrumb>
+        <HeaderBreadcrumb>{TITLE}</HeaderBreadcrumb>
+        <h1 className="sr-only">{TITLE}</h1>
         <HeaderDescription>
           In the neon-lit sprawl of Neo-Tokyo, a high-tech heist has shaken the corporate elite. The AI Core has been stolen
           from the secure vault on February 20, 2147. Dive into the database to uncover the hacker, the insider, and the
@@ -69,4 +72,3 @@ const solutions: Solution[] = [
 export const Route = createFileRoute("/cyberpunk_mystery_i")({
   component: CyberpunkMystery,
 });
-

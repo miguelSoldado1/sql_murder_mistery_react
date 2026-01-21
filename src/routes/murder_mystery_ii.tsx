@@ -7,13 +7,16 @@ import { initialEdges, initialNodes } from "@/schema/murder_mystery";
 import { createFileRoute } from "@tanstack/react-router";
 import type { Solution } from "@/types";
 
+const TITLE = "SQL Murder Mystery II";
+
 function MurderMysteryII() {
   const db = useDatabase("/database/murder_mystery.db");
 
   return (
     <section className="space-y-12">
       <HeaderWrapper>
-        <HeaderBreadcrumb>SQL Murder Mystery II</HeaderBreadcrumb>
+        <HeaderBreadcrumb>{TITLE}</HeaderBreadcrumb>
+        <h1 className="sr-only">{TITLE}</h1>
         <HeaderDescription>
           Another crime has occurred and the detective needs your help once again. You've been handed a case file, but some
           crucial details are missing. You remember that the <strong>crime was a murder</strong> that occurred on
