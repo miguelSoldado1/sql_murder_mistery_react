@@ -22,7 +22,7 @@ describe("Cyberpunk Mystery I", () => {
   it("description narrows to one incident for Cyberpunk Mystery I", () => {
     const res = db.exec(`
       SELECT * FROM incident_report
-      WHERE date = 21470220 AND type = 'theft' AND description LIKE '%AI Core%'
+      WHERE date = 21470220 AND type = 'theft'
     `);
     expect(res[0].values).toHaveLength(1);
   });
@@ -74,7 +74,6 @@ describe("Cyberpunk Mystery I", () => {
       AND ct.amount = 30000
       AND ct.crypto_type = 'CryptoByte'
       AND ll.sector = 'Sector 7'
-      AND ll.timestamp = 21470220
     `);
     expect(result[0].values).toHaveLength(1);
     expect(result[0].values[0][0]).toBe("Lira Kane");

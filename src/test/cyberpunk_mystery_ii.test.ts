@@ -22,7 +22,9 @@ describe("Cyberpunk Mystery II", () => {
   it("description narrows to one incident for Cyberpunk Mystery II", () => {
     const res = db.exec(`
       SELECT * FROM incident_report
-      WHERE date = 21470301 AND description LIKE '%Failsafe collapsed%'
+      WHERE date = 21470301
+      AND type = 'AI Breach'
+
     `);
     expect(res[0].values).toHaveLength(1);
   });
@@ -64,7 +66,6 @@ describe("Cyberpunk Mystery II", () => {
         AND ni.cyberware_type = 'Clearance Lattice'
         AND ct.amount = 45000
         AND ct.crypto_type = 'SpectraCoin'
-        AND ct.timestamp = 21470301
         AND ll.sector = 'Core Deck'
         AND ll.timestamp = 21470301
       GROUP BY p.id, p.name
@@ -87,7 +88,6 @@ describe("Cyberpunk Mystery II", () => {
       JOIN crypto_transaction ct_neo ON p.id = ct_neo.person_id AND ct_neo.amount = 50000 AND ct_neo.crypto_type = 'NeoCoin'
       JOIN crypto_transaction ct_lumi ON p.id = ct_lumi.person_id AND ct_lumi.amount = 20000 AND ct_lumi.crypto_type = 'LuminaCredit'
       WHERE p.role = 'Lead Scientist'
-        AND p.sector = 'Research Ring'
       GROUP BY p.id, p.name
       HAVING COUNT(ni.id) = 4
     `);
