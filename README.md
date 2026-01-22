@@ -1,4 +1,4 @@
-# SQL Cold Cases — React
+# SQL Cold Cases
 
 An interactive SQL puzzle web app built with React, TypeScript and Vite. This repository contains multiple "cold case" challenges, each backed by a small SQLite schema and data set. Players explore schemas, run SQL queries, and solve puzzles to progress. The app uses TanStack Router for client-side routing.
 
