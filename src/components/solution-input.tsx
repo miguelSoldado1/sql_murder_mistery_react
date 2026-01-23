@@ -49,7 +49,7 @@ export function SolutionInput({ solutions }: SolutionInputProps) {
           role="alert"
           className={cn(
             "mt-4 flex flex-col items-start gap-2 text-sm font-bold",
-            result.text === WRONG_SOLUTION && "text-red-500"
+            result.text === WRONG_SOLUTION && "text-destructive"
           )}
         >
           <span>{result.text}</span>
