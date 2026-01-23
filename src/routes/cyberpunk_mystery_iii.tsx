@@ -75,4 +75,7 @@ const solutions: Solution[] = [
 
 export const Route = createFileRoute("/cyberpunk_mystery_iii")({
   component: CyberpunkMysteryIII,
+  beforeLoad: () => {
+    document.title = TITLE;
+  },
 });

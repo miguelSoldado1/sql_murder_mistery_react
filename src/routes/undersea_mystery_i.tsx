@@ -77,4 +77,7 @@ const solutions: Solution[] = [
 
 export const Route = createFileRoute("/undersea_mystery_i")({
   component: UnderseaMysteryI,
+  beforeLoad: () => {
+    document.title = TITLE;
+  },
 });
