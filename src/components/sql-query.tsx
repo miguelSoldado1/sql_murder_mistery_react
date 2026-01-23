@@ -2,8 +2,10 @@ import React, { useRef, useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
 import Editor from "@monaco-editor/react";
 import { PlayIcon, RotateCcwIcon } from "lucide-react";
+import * as monaco from "monaco-editor";
 import { ResultsTable } from "./results-table";
 import { Button } from "./ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import type { editor } from "monaco-editor";
 import type { Database, QueryExecResult } from "sql.js";
 
@@ -17,11 +19,34 @@ interface SqlQueryProps {
 export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
   const [isPending, startTransition] = useTransition();
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   function handleEditorDidMount(editor: editor.IStandaloneCodeEditor) {
     editorRef.current = editor;
+
+    // Add Ctrl/Cmd + Enter to execute query
+    editor.addAction({
+      id: "execute-query",
+      label: "Execute Query",
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+      run: () => {
+        formRef.current?.requestSubmit();
+      },
+    });
+
+    // Add Ctrl/Cmd + K to clear editor
+    editor.addAction({
+      id: "clear-editor",
+      label: "Clear Editor",
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyK],
+      run: (editor) => {
+        editor.setValue("");
+        setResults(null);
+        setError(null);
+      },
+    });
   }
 
   function resetQuery() {
@@ -50,13 +75,14 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
 
   return (
     <div className="space-y-4">
-      <form onSubmit={handleSubmit} onReset={resetQuery}>
+      <form ref={formRef} onSubmit={handleSubmit} onReset={resetQuery}>
         {children}
         <Editor
           className="mb-4 rounded-md border border-input"
           height="200px"
           language="sql"
           defaultValue={defaultValue}
+          onMount={handleEditorDidMount}
           options={{
             scrollbar: { alwaysConsumeMouseWheel: false },
             minimap: { enabled: false },
@@ -64,21 +90,29 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
             folding: false,
             lineNumbersMinChars: 0,
           }}
-          onMount={handleEditorDidMount}
         />
-        <div className="flex max-w-md gap-2">
-          <Button type="submit" className="flex-1 gap-2" disabled={isPending}>
-            <PlayIcon className="size-4" />
-            Run Query
-          </Button>
-          <Button type="reset" variant="outline" className="flex-1 gap-2" disabled={isPending}>
-            <RotateCcwIcon className="size-4" />
-            Reset
-          </Button>
-        </div>
+        <TooltipProvider>
+          <div className="flex max-w-md gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button type="submit" className="flex-1 gap-2" disabled={isPending}>
+                  <PlayIcon className="size-4" />
+                  Run Query
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Ctrl + Enter</p>
+              </TooltipContent>
+            </Tooltip>
+            <Button type="reset" variant="outline" className="flex-1 gap-2" disabled={isPending}>
+              <RotateCcwIcon className="size-4" />
+              Reset
+            </Button>
+          </div>
+        </TooltipProvider>
       </form>
       {error && (
-        <div className="border-l-4 border-red-500 bg-red-100 p-4 text-red-700" role="alert">
+        <div className="border-l-4 border-destructive bg-destructive/10 p-4 text-destructive" role="alert">
           <p className="font-bold">Error</p>
           <p>{error}</p>
         </div>
