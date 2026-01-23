@@ -1,7 +1,7 @@
 import { SolvedIcon } from "@/components/solved-icon";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { getLocalStorageKey } from "@/lib/utils";
+import { isChallengeCompleted } from "@/lib/utils";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { Challenge } from "@/types";
 
@@ -12,6 +12,7 @@ const challenges: Challenge[] = [
   { href: "/cyberpunk_mystery_ii", title: "Cyberpunk Mystery II" },
   { href: "/cyberpunk_mystery_iii", title: "Cyberpunk Mystery III" },
   { href: "/undersea_mystery_i", title: "Undersea Mystery I" },
+  { href: "/undersea_mystery_ii", title: "Undersea Mystery II" },
 ];
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
                   <TableCell className="p-0">
                     <Link to={challenge.href} className="flex w-full items-center justify-between p-4">
                       <span> {challenge.title}</span>
-                      {localStorage.getItem(getLocalStorageKey(challenge.href)) === "true" && <SolvedIcon />}
+                      {isChallengeCompleted(challenge.href) && <SolvedIcon />}
                     </Link>
                   </TableCell>
                 </TableRow>

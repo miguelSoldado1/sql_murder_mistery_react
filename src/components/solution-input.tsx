@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { cn, getLocalStorageKey } from "@/lib/utils";
+import { cn, markChallengeCompleted } from "@/lib/utils";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { CheckIcon, ChevronLeftIcon } from "lucide-react";
 import { Button } from "./ui/button";
@@ -25,9 +25,7 @@ export function SolutionInput({ solutions }: SolutionInputProps) {
     const foundSolution = solutions.find((s) => s.solution.trim().toLowerCase() === normalizedSolution);
     if (foundSolution) {
       if (foundSolution.final) {
-        const key = getLocalStorageKey(router.location.pathname);
-        const puzzleSolution = localStorage.getItem(key);
-        if (!puzzleSolution) localStorage.setItem(key, "true");
+        markChallengeCompleted(router.location.pathname);
       }
 
       return setResult({ text: foundSolution.text, isFinal: foundSolution.final });
