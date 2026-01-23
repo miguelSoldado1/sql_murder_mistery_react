@@ -19,6 +19,7 @@ interface SqlQueryProps {
 export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
   const [isPending, startTransition] = useTransition();
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,7 +32,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
       label: "Execute Query",
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
       run: () => {
-        executeQuery();
+        formRef.current?.requestSubmit();
       },
     });
 
@@ -55,7 +56,8 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
     });
   }
 
-  function executeQuery() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     const query = editorRef.current?.getValue();
     if (!db || !query) return;
 
@@ -71,14 +73,9 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
     });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    executeQuery();
-  }
-
   return (
     <div className="space-y-4">
-      <form onSubmit={handleSubmit} onReset={resetQuery}>
+      <form ref={formRef} onSubmit={handleSubmit} onReset={resetQuery}>
         {children}
         <Editor
           className="mb-4 rounded-md border border-input"
