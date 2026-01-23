@@ -104,7 +104,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Ctrl + Enter</p>
+                <p>Ctrl/Cmd + Enter</p>
               </TooltipContent>
             </Tooltip>
             <Button type="reset" variant="outline" className="flex-1 gap-2" disabled={isPending}>
