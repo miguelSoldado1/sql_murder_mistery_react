@@ -19,7 +19,6 @@ interface SqlQueryProps {
 export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
   const [isPending, startTransition] = useTransition();
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
   const [results, setResults] = useState<QueryExecResult[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -79,7 +78,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
 
   return (
     <div className="space-y-4">
-      <form ref={formRef} onSubmit={handleSubmit} onReset={resetQuery}>
+      <form onSubmit={handleSubmit} onReset={resetQuery}>
         {children}
         <Editor
           className="mb-4 rounded-md border border-input"
