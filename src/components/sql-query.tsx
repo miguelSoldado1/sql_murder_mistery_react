@@ -32,7 +32,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
       label: "Execute Query",
       keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
       run: () => {
-        formRef.current?.requestSubmit();
+        executeQuery();
       },
     });
 
@@ -56,8 +56,7 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
     });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function executeQuery() {
     const query = editorRef.current?.getValue();
     if (!db || !query) return;
 
@@ -71,6 +70,11 @@ export function SqlQuery({ children, db, defaultValue }: SqlQueryProps) {
         setResults([]);
       }
     });
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    executeQuery();
   }
 
   return (
